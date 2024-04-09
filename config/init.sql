@@ -39,7 +39,7 @@ CREATE TABLE agrs(
     status TEXT NOT NULL, -- active, inactive, deleted, blocked
     open_time TEXT NOT NULL,
     close_time TEXT NOT NULL,
-    manager_id INTEGER REFERENCES users(id) NOT NULL,
+    executor_id INTEGER REFERENCES users(id) NOT NULL,
     branch_id INTEGER REFERENCES branches(id) NOT NULL
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE cell(
     status TEXT NOT NULL, -- active, inactive, deleted, blocked
     sequence_number INTEGER NOT NULL, -- serial number for cell
     agr_id INTEGER REFERENCES agrs(id) NOT NULL,
-    user_id INTEGER REFERENCES users(id) NOT NULL
+    user_id INTEGER REFERENCES users(id)
 );
 
 CREATE TABLE visit(
