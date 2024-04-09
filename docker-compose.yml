@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: awardrobe
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./config/test_data.sql:/docker-entrypoint-initdb.d/test_data.sql
+
+  app:
+    build:
+      context: ./main
+      dockerfile: dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/awardrobe
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_GENERATE_DDL=true
+      - AUTH_SERVICE_PORT=8081
