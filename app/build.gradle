@@ -32,6 +32,6 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+springBoot {
+	mainClass = 'ru.mirea.ikbo2021.sidorov.awardrobe.AwardrobeApplication'
 }
