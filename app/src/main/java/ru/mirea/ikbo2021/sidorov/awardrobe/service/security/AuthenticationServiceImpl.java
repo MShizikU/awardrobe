@@ -47,7 +47,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         ));
 
         var user = userRepository
-                .findByUserName(request.username())
+                .findByUsername(request.username())
                 .orElseThrow(InvalidUserDataProblem::new);
 
         var jwt = jwtService.generateToken(user);
