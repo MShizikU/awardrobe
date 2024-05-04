@@ -5,12 +5,11 @@ CREATE TABLE user_roles(
 
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
-    hashcode TEXT NOT NULL,
+    hashcode TEXT NOT NULL UNIQUE,
     is_disposable BOOLEAN NOT NULL,
     status TEXT NOT NULL, -- active, inactive, deleted, blocked, used
-    username TEXT NOT NULL UNIQUE,
+    username TEXT UNIQUE,
     email TEXT UNIQUE, -- email address for login
-    phone TEXT UNIQUE, -- phone number for login
     password TEXT, -- password for login, hashed with bcrypt
     role_id INTEGER REFERENCES user_roles(id) NOT NULL
 );

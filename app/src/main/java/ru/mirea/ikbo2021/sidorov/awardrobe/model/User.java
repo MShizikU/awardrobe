@@ -59,12 +59,6 @@ public class User implements UserDetails {
     private String email;
 
     /**
-     * Номер телефона
-     */
-    @Column(name = "phone", unique = true)
-    private String phone;
-
-    /**
      * Пароль
      */
     @Column(name = "password", nullable = false)
@@ -74,7 +68,7 @@ public class User implements UserDetails {
      * Роль
      */
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "role_id")
     private UserRole role;
 
     @Override
