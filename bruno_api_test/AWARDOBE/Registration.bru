@@ -1,0 +1,20 @@
+meta {
+  name: Registration
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base}}/auth/sign-up
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username" : "MShiz",
+    "email" : "sidorovstasd7@gmail.com",
+    "password": "Work632004",
+    "role" : "ADMIN"
+  }
+}

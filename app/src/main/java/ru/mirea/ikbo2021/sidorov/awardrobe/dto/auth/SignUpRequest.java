@@ -31,7 +31,7 @@ public record SignUpRequest(
 
         @Schema(description = "Роль", example = "USER")
         @NotBlank(message = "Роль не может быть пустой")
-        UserRole role
+        String role
 
 ) {
 }
