@@ -12,7 +12,7 @@ services:
       - "5433:5432"
     volumes:
       - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./config/init-data.sql:/docker-entrypoint-initdb.d/init-data.sql
+      - ./config/init-data.sql:/docker-entrypoint-initdb.d/test-init-data.sql
       - ./config/init-data.sql:/docker-entrypoint-initdb.d/test-data.sql
 
   app:
@@ -31,6 +31,6 @@ services:
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
       - SPRING_JPA_SHOW_SQL=true
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
       - SPRING_JPA_GENERATE_DDL=true
       - AUTH_SERVICE_PORT=8081

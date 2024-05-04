@@ -68,7 +68,7 @@ CREATE TABLE action_names(
 );
 
 CREATE TABLE action_types(
-    id id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE
 );
 
@@ -79,5 +79,5 @@ CREATE TABLE log(
     related_entity_id BIGINT NOT NULL, -- id of related entity (e.g. user_id, company_id)
     action_name_id INTEGER REFERENCES action_names(id) NOT NULL,
     action_type_id INTEGER REFERENCES action_types(id) NOT NULL,
-    performer_id INTEGEREGER REFERENCES users(id) NOT NULL
+    performer_id INTEGER REFERENCES users(id) NOT NULL
 );

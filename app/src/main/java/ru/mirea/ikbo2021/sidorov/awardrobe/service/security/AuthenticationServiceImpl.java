@@ -11,6 +11,7 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.InvalidUserDataProblem
 import ru.mirea.ikbo2021.sidorov.awardrobe.model.User;
 import ru.mirea.ikbo2021.sidorov.awardrobe.model.security.EmailPasswordAuthenticationToken;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.UserRepository;
+import ru.mirea.ikbo2021.sidorov.awardrobe.repository.UserRoleRepository;
 import ru.mirea.ikbo2021.sidorov.awardrobe.service.UserService;
 import ru.mirea.ikbo2021.sidorov.awardrobe.service.security.interfaces.AuthenticationService;
 import ru.mirea.ikbo2021.sidorov.awardrobe.service.security.interfaces.JwtService;
@@ -19,6 +20,7 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.service.security.interfaces.JwtServic
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
+    private final UserRoleRepository roleRepository;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -26,11 +28,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
+        var relatedRole = roleRepository.findByName(request.role());
+        var userRole = relatedRole.isEmpty() ? roleRepository.findByName("USER").get() : relatedRole.get();
 
         var user = User.builder()
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
-                .role(request.role())
+                .role(userRole)
                 .build();
 
         userService.create(user);
