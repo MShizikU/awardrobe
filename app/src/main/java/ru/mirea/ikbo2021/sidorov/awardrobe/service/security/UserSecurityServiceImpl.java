@@ -14,7 +14,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
 
     @Override
     public UserDetailsService userDetailsService() {
-        return email -> repository.findByUserName(email)
+        return email -> repository.findByUsername(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
     }
 }
