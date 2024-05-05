@@ -9,6 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.List;
 
@@ -70,6 +72,41 @@ public class User implements UserDetails {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "role_id")
     private UserRole role;
+
+    /**
+     * Проверка, является ли пользователь администратором
+     *
+     * @return true, если пользователь администратор
+     */
+    public boolean isAdmin() {
+        return role.getName() == "ADMIN";
+    }
+
+    /**
+     * Вычисление hashcode пользователя
+     *
+     * @return void
+     */
+    public void genHash(){
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException ignored) {
+
+        }
+        byte[] hashedBytes = digest.digest((this.username + " " + this.email).getBytes());
+
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hashedBytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+
+        this.hashcode = hexString.toString();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

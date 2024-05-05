@@ -1,9 +1,9 @@
 INSERT INTO users (hashcode, is_disposable, status,username,  email, phone, password, role_id) VALUES
-    ('abcd1234', false, 'active','Shiz', 'ADMIN@example.com', NULL, 'hashed_password', 1),
-    ('xyz9876', false, 'active','CoolManager', 'MANAGER@example.com', NULL, 'hashed_password', 2),
-    ('uvw5678', false, 'active','BestObserver111', 'OBSERVER@example.com', NULL, 'hashed_password', 3),
-    ('qwe1234', false, 'active','Executor777', 'EXECUTOR@example.com', NULL, 'hashed_password', 4),
-    ('rty1234', false, 'active','SimpleUser', 'USER@example.com', NULL, 'hashed_password', 5);
+    ('abcd1234', false, 'active','MShiz', 'ADMIN@example.com', NULL, 'password', 1),
+    ('xyz9876', false, 'active','CoolManager', 'MANAGER@example.com', NULL, 'password', 2),
+    ('uvw5678', false, 'active','BestObserver111', 'OBSERVER@example.com', NULL, 'password', 3),
+    ('qwe1234', false, 'active','Executor777', 'EXECUTOR@example.com', NULL, 'password', 4),
+    ('rty1234', false, 'active','SimpleUser', 'USER@example.com', NULL, 'password', 5);
 
 INSERT INTO companies (status, name, inn, company_code, phyzical_address, legal_address, manager_id) VALUES
     ('active', 'Moscow State University', '1234567890', 'MSU77', '??????, ????????? ????, ???, ?. 1', '??????, ????????? ????, ???, ?. 1', 2),
