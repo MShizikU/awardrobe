@@ -6,12 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users", indexes = {
+@Table(name = "companies", indexes = {
         @Index(name = "idx_inn", columnList = "inn")
 })
 public class Company {
@@ -31,7 +33,7 @@ public class Company {
     /**
      * ИНН
      */
-    @Column(name = "company", unique = true, nullable = false)
+    @Column(name = "inn", unique = true, nullable = false)
     private String inn;
 
     /**
@@ -61,6 +63,6 @@ public class Company {
      */
     public boolean isActive()
     {
-        return status == "active";
+        return Objects.equals(status, "active");
     }
 }

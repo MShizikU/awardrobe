@@ -13,6 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -79,7 +80,7 @@ public class User implements UserDetails {
      * @return true, если пользователь администратор
      */
     public boolean isAdmin() {
-        return role.getName() == "ADMIN";
+        return Objects.equals(role.getName(), "ADMIN");
     }
 
     /**

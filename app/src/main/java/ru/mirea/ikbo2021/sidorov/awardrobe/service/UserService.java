@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.config.security.SuperUserConfig;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils.Status;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotFound;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotUniqueEmailProblem;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotUniqueUsernameProblem;
@@ -83,6 +84,8 @@ public class UserService {
         if (user.isEmpty()) {
             User u = new User();
             u.setId(superuserId);
+            u.setIsDisposable(false);
+            u.setStatus(Status.ACTIVE.getStatus());
             u.setUsername("superuser");
             u.setEmail("superuser" + "@test.ru");
             u.setPassword(passwordEncoder.encode(superUserConfig.getSuperuserDefaultPassword()));

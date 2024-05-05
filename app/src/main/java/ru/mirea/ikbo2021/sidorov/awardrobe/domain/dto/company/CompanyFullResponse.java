@@ -1,7 +1,10 @@
 package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.company;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.branch.BranchCompactResponse;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.HiddenUserResponse;
+
+import java.util.List;
 
 @Schema(description = "Расширенный ответ на запрос данных компании")
 public record CompanyFullResponse(
@@ -18,8 +21,9 @@ public record CompanyFullResponse(
         @Schema(description = "Юридический адрес компании", example = "ул. Колотушкина, д. 1")
         String legal_address,
         @Schema(description = "Отвественный")
-        HiddenUserResponse userResponse
+        HiddenUserResponse user,
 
-        //TODO Добавить филиалы
+        @Schema(description = "Список филиалов")
+        List<BranchCompactResponse> branches
 ) {
 }

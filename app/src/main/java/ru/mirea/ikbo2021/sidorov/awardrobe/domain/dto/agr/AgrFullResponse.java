@@ -2,7 +2,10 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.agr;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.branch.BranchCompactResponse;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.cell.CellCompactResponse;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.HiddenUserResponse;
+
+import java.util.List;
 
 @Schema(description = "Полный ответ на запрос гардеробного ряда")
 public record AgrFullResponse(
@@ -22,8 +25,9 @@ public record AgrFullResponse(
         HiddenUserResponse manager,
 
         @Schema(description = "Головной филиал")
-        BranchCompactResponse branch
+        BranchCompactResponse branch,
 
-        //TODO добавить список ячеек
+        @Schema(description = "Список ячеек")
+        List<CellCompactResponse> cells
 ) {
 }

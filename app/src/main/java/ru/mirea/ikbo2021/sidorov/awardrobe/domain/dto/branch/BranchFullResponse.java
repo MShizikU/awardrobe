@@ -1,8 +1,11 @@
 package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.branch;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.agr.AgrCompactResponse;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.company.CompanyCompactResponse;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.HiddenUserResponse;
+
+import java.util.List;
 
 @Schema(description = "Полный ответ на запрос филиала")
 public record BranchFullResponse(
@@ -22,8 +25,9 @@ public record BranchFullResponse(
         HiddenUserResponse manager,
 
         @Schema(description = "Головная компания")
-        CompanyCompactResponse company
+        CompanyCompactResponse company,
 
-        //TODO добавить список agr
+        @Schema(description = "Список гардеробных рядов")
+        List<AgrCompactResponse> agrs
 ) {
 }
