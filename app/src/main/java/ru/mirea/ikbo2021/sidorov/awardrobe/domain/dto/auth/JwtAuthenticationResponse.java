@@ -1,4 +1,4 @@
-package ru.mirea.ikbo2021.sidorov.awardrobe.dto.auth;
+package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.auth;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

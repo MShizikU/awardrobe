@@ -2,13 +2,14 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.User;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Company;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUsername(String email);
+public interface CompanyRepository extends JpaRepository<Company, Long> {
+
+    Optional<Company> findByInn(String inn);
 
     boolean existsByUsername(String username);
 

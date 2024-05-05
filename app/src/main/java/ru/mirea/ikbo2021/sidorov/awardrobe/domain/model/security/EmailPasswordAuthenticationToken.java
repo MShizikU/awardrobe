@@ -1,4 +1,4 @@
-package ru.mirea.ikbo2021.sidorov.awardrobe.model.security;
+package ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.security;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 

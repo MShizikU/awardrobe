@@ -3,16 +3,14 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.service;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.config.security.SuperUserConfig;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotFound;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotUniqueEmailProblem;
-import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotUniquePhoneProblem;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotUniqueUsernameProblem;
-import ru.mirea.ikbo2021.sidorov.awardrobe.model.User;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.User;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.UserRepository;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.UserRoleRepository;
 

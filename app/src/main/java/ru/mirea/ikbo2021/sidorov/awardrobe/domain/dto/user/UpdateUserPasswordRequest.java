@@ -1,4 +1,4 @@
-package ru.mirea.ikbo2021.sidorov.awardrobe.dto.user;
+package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Pattern;

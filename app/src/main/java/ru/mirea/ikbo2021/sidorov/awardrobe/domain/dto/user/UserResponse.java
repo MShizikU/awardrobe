@@ -1,12 +1,8 @@
-package ru.mirea.ikbo2021.sidorov.awardrobe.dto.user;
+package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Builder;
-import ru.mirea.ikbo2021.sidorov.awardrobe.model.UserRole;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.UserRole;
 
 @Builder
 @Schema(description = "Ответ на запрос пользователя")

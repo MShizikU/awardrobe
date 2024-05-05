@@ -1,4 +1,4 @@
-package ru.mirea.ikbo2021.sidorov.awardrobe.dto.auth;
+package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.auth;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
-import ru.mirea.ikbo2021.sidorov.awardrobe.model.UserRole;
 
 @Builder
 @Schema(description = "Запрос на регистрацию")

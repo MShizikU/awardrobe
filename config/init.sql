@@ -7,7 +7,7 @@ CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     hashcode TEXT NOT NULL UNIQUE,
     is_disposable BOOLEAN NOT NULL,
-    status TEXT NOT NULL, -- active, inactive, deleted, blocked, used
+    status TEXT NOT NULL, -- active, inactive, deleted, blocked
     username TEXT UNIQUE,
     email TEXT UNIQUE, -- email address for login
     password TEXT, -- password for login, hashed with bcrypt
@@ -19,8 +19,7 @@ CREATE TABLE companies(
     status TEXT NOT NULL, -- active, inactive, deleted, blocked
     name TEXT NOT NULL UNIQUE,
     inn TEXT NOT NULL UNIQUE,
-    company_code TEXT NOT NULL UNIQUE,
-    phyzical_address TEXT NOT NULL,
+    physical_address TEXT NOT NULL,
     legal_address TEXT NOT NULL,
     manager_id INTEGER REFERENCES users(id) NOT NULL
 );
@@ -29,7 +28,6 @@ CREATE TABLE branches(
     id SERIAL PRIMARY KEY,
     status TEXT NOT NULL, -- active, inactive, deleted, blocked
     name TEXT NOT NULL,
-    branch_code TEXT NOT NULL,
     manager_id INTEGER REFERENCES users(id) NOT NULL,
     company_id INTEGER REFERENCES companies(id) NOT NULL
 );
@@ -60,6 +58,7 @@ CREATE TABLE visit(
     branch_id INTEGER REFERENCES branches(id) NOT NULL
 );
 
+/*
 CREATE TABLE action_names(
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
@@ -79,4 +78,4 @@ CREATE TABLE log(
     action_name_id INTEGER REFERENCES action_names(id) NOT NULL,
     action_type_id INTEGER REFERENCES action_types(id) NOT NULL,
     performer_id INTEGER REFERENCES users(id) NOT NULL
-);
+);*/

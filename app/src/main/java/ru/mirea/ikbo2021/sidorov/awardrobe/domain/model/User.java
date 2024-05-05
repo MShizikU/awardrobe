@@ -1,4 +1,4 @@
-package ru.mirea.ikbo2021.sidorov.awardrobe.model;
+package ru.mirea.ikbo2021.sidorov.awardrobe.domain.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
