@@ -16,6 +16,9 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.service.UserService;
 import ru.mirea.ikbo2021.sidorov.awardrobe.service.security.interfaces.AuthenticationService;
 import ru.mirea.ikbo2021.sidorov.awardrobe.service.security.interfaces.JwtService;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -23,18 +26,39 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRoleRepository roleRepository;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtService;
     private final AuthenticationManager authenticationManager;
 
     @Override
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
         var relatedRole = roleRepository.findByName(request.role());
         var userRole = relatedRole.isEmpty() ? roleRepository.findByName("USER").get() : relatedRole.get();
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException ignored) {
 
+        }
+        byte[] hashedBytes = digest.digest((request.username() + " " + request.email()).getBytes());
+
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hashedBytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+
+        String hash = hexString.toString();
         var user = User.builder()
+                .username(request.username())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .role(userRole)
+                .isDisposable(false)
+                .status("active")
+                .hashcode(hash)
                 .build();
 
         userService.create(user);

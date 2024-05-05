@@ -42,11 +42,6 @@ public class UserService {
             throw new UserNotUniqueEmailProblem(user.getEmail());
         }
 
-        if(repository.existsByPhone(user.getPhone()))
-        {
-            throw new UserNotUniquePhoneProblem(user.getPhone());
-        }
-
         return save(user);
     }
 }
