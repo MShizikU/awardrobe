@@ -54,8 +54,7 @@ CREATE TABLE visit(
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     cell_id INTEGER REFERENCES cell(id) NOT NULL,
-    user_id INTEGER REFERENCES users(id) NOT NULL,
-    branch_id INTEGER REFERENCES branches(id) NOT NULL
+    user_id INTEGER REFERENCES users(id) NOT NULL
 );
 
 /*
