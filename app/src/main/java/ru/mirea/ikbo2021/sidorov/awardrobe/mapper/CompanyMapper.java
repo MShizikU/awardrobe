@@ -31,4 +31,5 @@ public interface CompanyMapper {
     CompanyFullResponse toFullResponse(Company company, List<Branch> branches);
     Company fromCreateRequest(CompanyCreationRequest request);
     Company fromUpdateRequest(CompanyUpdateRequest request);
+    List<CompanyCompactResponse> toListCompactResponse(List<Company> compacts);
 }

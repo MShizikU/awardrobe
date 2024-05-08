@@ -15,6 +15,8 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.User;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.UserRepository;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.UserRoleRepository;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -30,8 +32,16 @@ public class UserService {
      * @return пользователь
      */
     public User getByUsername(String username) {
-        UserRepository userRepository;
         return repository.findByUsername(username).orElseThrow(() -> new UserNotFound(username));
+    }
+
+    /**
+     * Получение пользователя по ID
+     *
+     * @return пользователь
+     */
+    public Optional<User> getById(Long id) {
+        return repository.findById(id);
     }
 
     /**
