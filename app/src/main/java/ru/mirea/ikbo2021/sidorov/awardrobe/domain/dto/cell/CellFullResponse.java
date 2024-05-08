@@ -13,7 +13,7 @@ public record CellFullResponse(
         String status,
 
         @Schema(description = "Номер ячейки", example = "1")
-        Integer sequenceNumber,
+        Integer sequence_number,
 
         @Schema(description = "Текущий пользователь")
         HiddenUserResponse user,

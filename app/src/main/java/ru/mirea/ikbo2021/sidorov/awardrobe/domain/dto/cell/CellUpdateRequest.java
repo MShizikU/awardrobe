@@ -8,7 +8,7 @@ public record CellUpdateRequest(
         String status,
 
         @Schema(description = "Номер ячейки", example = "1")
-        Integer sequenceNumber,
+        Integer sequence_number,
 
         @Schema(description = "ID текущего пользователя", example = "1")
         Long user_id,

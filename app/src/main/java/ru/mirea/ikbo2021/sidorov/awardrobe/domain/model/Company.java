@@ -40,20 +40,20 @@ public class Company {
      * Физический адрес
      */
     @Column(name = "physical_address", nullable = false)
-    private String physical_address;
+    private String physicalAddress;
 
     /**
      * Юридический адрес
      */
     @Column(name = "legal_address", nullable = false)
-    private String legal_address;
+    private String legalAddress;
 
     /**
      * Ответсвенный
      */
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "manager_id")
-    private User manager_id;
+    private User manager;
 
 
     /**

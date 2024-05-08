@@ -22,7 +22,7 @@ public record AgrFullResponse(
         String close_time,
 
         @Schema(description = "Текущий исполнитель")
-        HiddenUserResponse manager,
+        HiddenUserResponse executor,
 
         @Schema(description = "Головной филиал")
         BranchCompactResponse branch,

@@ -18,9 +18,6 @@ public record BranchFullResponse(
         @Schema(description = "Название филиала", example = "Филиал №1")
         String name,
 
-        @Schema(description = "Код филиала", example = "123456")
-        String branchCode,
-
         @Schema(description = "Ответственный")
         HiddenUserResponse manager,
 

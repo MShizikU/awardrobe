@@ -10,10 +10,10 @@ public record VisitFullResponse(
         Long id,
 
         @Schema(description = "Время начала визита", example = "2024-05-05 10:00:00")
-        String startTime,
+        String start_time,
 
         @Schema(description = "Время окончания визита", example = "2024-05-05 12:00:00")
-        String endTime,
+        String end_time,
 
         @Schema(description = "Посетитель")
         HiddenUserResponse user,

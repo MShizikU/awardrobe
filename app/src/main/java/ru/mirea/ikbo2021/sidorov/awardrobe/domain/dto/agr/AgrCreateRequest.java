@@ -13,6 +13,6 @@ public record AgrCreateRequest(
         @Schema(description = "ID исполнителя", example = "1")
         Long executor_id,
         @Schema(description = "ID филиала", example = "1")
-        Long branchId
+        Long branch_id
 ) {
 }

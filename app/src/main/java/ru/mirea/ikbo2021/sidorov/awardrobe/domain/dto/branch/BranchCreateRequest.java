@@ -8,11 +8,9 @@ public record BranchCreateRequest(
         String status,
         @Schema(description = "Название филиала", example = "Филиал №1")
         String name,
-        @Schema(description = "Код филиала", example = "123456")
-        String branchCode,
         @Schema(description = "ID ответственного менеджера", example = "1")
-        Long managerId,
+        Long manager_id,
         @Schema(description = "ID компании", example = "1")
-        Long companyId
+        Long company_id
 ) {
 }
