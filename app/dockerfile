@@ -1,11 +1,11 @@
-FROM openjdk:17-jdk-alpine AS build
+FROM openjdk:21-slim AS build
 ENV HOME=/usr/app
 RUN mkdir -p $HOME
 WORKDIR $HOME
 ADD . $HOME
 RUN --mount=type=cache,target=/root/.m2 ./mvnw -f $HOME/pom.xml clean package -Dskiptests
 
-FROM openjdk:17-jdk-alpine
+FROM openjdk:21-slim
 ARG JAR_FILE=/usr/app/target/*.jar
 ARG SERVER_PORT
 COPY --from=build $JAR_FILE /app/runner.jar
