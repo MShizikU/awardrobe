@@ -5,9 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Company;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils.Status;
-import ru.mirea.ikbo2021.sidorov.awardrobe.exception.company.CompanyFieldNotValid;
-import ru.mirea.ikbo2021.sidorov.awardrobe.exception.company.CompanyNotFoundID;
-import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotFound;
+import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityFieldNotValid;
+import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityNotFound;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.CompanyRepository;
 
 import java.util.List;
@@ -37,7 +36,7 @@ public class CompanyService {
     public Company create(Company company) {
         var manager = userService.getById(company.getManager().getId());
         if (manager.isEmpty()){
-            throw new UserNotFound(company.getManager().getId().toString());
+            throw new EntityNotFound("Пользователь", "ID", company.getManager().getId().toString());
         }
         return save(
                 Company.builder()
@@ -57,7 +56,7 @@ public class CompanyService {
      */
     public Company getById(Long id) {
         Optional<Company> company = repository.findById(id);
-        if (company.isEmpty()) throw new CompanyNotFoundID(id);
+        if (company.isEmpty()) throw new EntityNotFound("company", "id", id.toString());
         return company.get();
     }
 
@@ -87,11 +86,11 @@ public class CompanyService {
     @Transactional
     public Company update(Long companyId, Company company) {
         Optional<Company> companyOptional = repository.findById(companyId);
-        if (companyOptional.isEmpty()) throw new CompanyNotFoundID(companyId);
+        if (companyOptional.isEmpty()) throw new EntityNotFound("company", "id", companyId.toString());
 
         var manager = userService.getById(company.getManager().getId());
         if (manager.isEmpty()){
-            throw new UserNotFound(company.getManager().getId().toString());
+            throw new EntityNotFound("Пользователь", "ID", company.getManager().getId().toString());
         }
 
         Company toUpdate = companyOptional.get();
@@ -101,16 +100,16 @@ public class CompanyService {
             toUpdate.setStatus(company.getStatus());
         }
         catch (IllegalArgumentException e){
-            throw new CompanyFieldNotValid("status");
+            throw new EntityFieldNotValid("company","status", company.getStatus());
         }
 
-        if (company.getInn().isEmpty()) throw new CompanyFieldNotValid("inn");
+        if (company.getInn().isEmpty()) throw new EntityFieldNotValid("company","inn", company.getInn());
         toUpdate.setInn(company.getInn());
 
-        if (company.getPhysicalAddress().isEmpty()) throw new CompanyFieldNotValid("physicalAddress");
+        if (company.getPhysicalAddress().isEmpty()) throw new EntityFieldNotValid("company","physicalAddress", company.getPhysicalAddress());
         toUpdate.setPhysicalAddress(company.getPhysicalAddress());
 
-        if (company.getLegalAddress().isEmpty()) throw new CompanyFieldNotValid("legalAddress");
+        if (company.getLegalAddress().isEmpty()) throw new EntityFieldNotValid("company","legalAddress", company.getLegalAddress());
         toUpdate.setLegalAddress(company.getLegalAddress());
 
         toUpdate.setManager(manager.get());
@@ -126,7 +125,7 @@ public class CompanyService {
      */
     public void deleteById(Long companyId) {
         Optional<Company> companyOptional = repository.findById(companyId);
-        if (companyOptional.isEmpty()) throw new CompanyNotFoundID(companyId);
+        if (companyOptional.isEmpty()) throw new EntityNotFound("company", "id", companyId.toString());
         Company company = companyOptional.get();
         company.setStatus(Status.DELETED.getStatus());
         repository.save(company);

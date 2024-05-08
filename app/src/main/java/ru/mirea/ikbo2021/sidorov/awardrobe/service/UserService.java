@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.config.security.SuperUserConfig;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils.Status;
-import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotFound;
+import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityNotFound;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotUniqueEmailProblem;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.user.UserNotUniqueUsernameProblem;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.User;
@@ -32,7 +32,7 @@ public class UserService {
      * @return пользователь
      */
     public User getByUsername(String username) {
-        return repository.findByUsername(username).orElseThrow(() -> new UserNotFound(username));
+        return repository.findByUsername(username).orElseThrow(() -> new EntityNotFound("Пользователь", "username", username));
     }
 
     /**
