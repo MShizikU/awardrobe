@@ -31,4 +31,5 @@ public interface BranchMapper {
     BranchFullResponse toFullResponse(Branch branch, List<Agr> agrs);
     Branch fromCreateRequest(BranchCreateRequest request);
     Branch fromUpdateRequest(BranchUpdateRequest request);
+    List<BranchCompactResponse> toListCompactResponse(List<Branch> branches);
 }

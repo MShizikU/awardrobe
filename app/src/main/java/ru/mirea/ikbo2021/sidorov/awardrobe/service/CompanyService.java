@@ -3,6 +3,7 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.company.CompanyFilter;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Company;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils.Status;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityFieldNotValid;
@@ -27,24 +28,22 @@ public class CompanyService {
     }
 
     /**
-     * Создание комментария
+     * Создание компании
      *
      * @param company данные из запроса
      * @return созданная компания
      */
     @Transactional
     public Company create(Company company) {
-        var manager = userService.getById(company.getManager().getId());
-        if (manager.isEmpty()){
-            throw new EntityNotFound("Пользователь", "ID", company.getManager().getId().toString());
-        }
+        var manager = userService.getByIdStrict(company.getManager().getId());
+
         return save(
                 Company.builder()
                         .status(company.getStatus())
                         .inn(company.getInn())
                         .physicalAddress(company.getPhysicalAddress())
                         .legalAddress(company.getLegalAddress())
-                        .manager(manager.get())
+                        .manager(manager)
                         .build()
         );
     }
@@ -70,6 +69,24 @@ public class CompanyService {
     }
 
     /**
+     * Получение по фильтру
+     *
+     * @param filter фильтр
+     * @return Найденные филиалы
+     */
+    public List<Company> findByFilter(CompanyFilter filter) {
+
+        return repository.findAllWithFilter(
+                filter.id(),
+                filter.status(),
+                filter.inn(),
+                filter.physical_address(),
+                filter.legal_address(),
+                filter.manager_id()
+        );
+    }
+
+    /**
      * Получение всех компаний
      *
      * @return список компаний
@@ -85,15 +102,9 @@ public class CompanyService {
      */
     @Transactional
     public Company update(Long companyId, Company company) {
-        Optional<Company> companyOptional = repository.findById(companyId);
-        if (companyOptional.isEmpty()) throw new EntityNotFound("company", "id", companyId.toString());
+        Company toUpdate = getById(companyId);
 
-        var manager = userService.getById(company.getManager().getId());
-        if (manager.isEmpty()){
-            throw new EntityNotFound("Пользователь", "ID", company.getManager().getId().toString());
-        }
-
-        Company toUpdate = companyOptional.get();
+        var manager = userService.getByIdStrict(company.getManager().getId());
 
         try {
             Status.valueOf(company.getStatus());
@@ -103,16 +114,10 @@ public class CompanyService {
             throw new EntityFieldNotValid("company","status", company.getStatus());
         }
 
-        if (company.getInn().isEmpty()) throw new EntityFieldNotValid("company","inn", company.getInn());
         toUpdate.setInn(company.getInn());
-
-        if (company.getPhysicalAddress().isEmpty()) throw new EntityFieldNotValid("company","physicalAddress", company.getPhysicalAddress());
         toUpdate.setPhysicalAddress(company.getPhysicalAddress());
-
-        if (company.getLegalAddress().isEmpty()) throw new EntityFieldNotValid("company","legalAddress", company.getLegalAddress());
         toUpdate.setLegalAddress(company.getLegalAddress());
-
-        toUpdate.setManager(manager.get());
+        toUpdate.setManager(manager);
 
         return repository.save(toUpdate);
 
@@ -123,10 +128,8 @@ public class CompanyService {
      *
      * @return void
      */
-    public void deleteById(Long companyId) {
-        Optional<Company> companyOptional = repository.findById(companyId);
-        if (companyOptional.isEmpty()) throw new EntityNotFound("company", "id", companyId.toString());
-        Company company = companyOptional.get();
+    public void deleteByIdSoft(Long companyId) {
+        var company = getById(companyId);
         company.setStatus(Status.DELETED.getStatus());
         repository.save(company);
     }

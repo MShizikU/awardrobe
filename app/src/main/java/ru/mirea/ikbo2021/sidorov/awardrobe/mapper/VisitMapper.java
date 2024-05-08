@@ -10,6 +10,8 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.visit.VisitFullResponse;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.visit.VisitUpdateRequest;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Visit;
 
+import java.util.List;
+
 @Mapper(
         uses = {UserMapper.class, BranchMapper.class, CellMapper.class},
         unmappedTargetPolicy = ReportingPolicy.ERROR,
@@ -30,4 +32,5 @@ public interface VisitMapper {
     VisitFullResponse toFullResponse(Visit visit);
     Visit fromCreateRequest(VisitCreateRequest request);
     Visit fromUpdateRequest(VisitUpdateRequest request);
+    List<Visit> toListCompactResponse(List<Visit> visits);
 }

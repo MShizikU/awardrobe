@@ -45,6 +45,18 @@ public class UserService {
     }
 
     /**
+     * Строгое получение пользователя по ID
+     *
+     * @return пользователь
+     */
+    public User getByIdStrict(Long id) {
+        var user = repository.findById(id);
+        if (user.isEmpty()) throw new EntityNotFound("user", "id", id.toString());
+        return user.get();
+    }
+
+
+    /**
      * Получение текущего пользователя из токена
      *
      * @return текущий пользователь

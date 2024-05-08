@@ -10,6 +10,8 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.cell.CellFullResponse;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.cell.CellUpdateRequest;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Cell;
 
+import java.util.List;
+
 @Mapper(
         uses = { UserMapper.class, AgrMapper.class },
         unmappedTargetPolicy = ReportingPolicy.ERROR,
@@ -32,4 +34,6 @@ public interface CellMapper {
     Cell toCreateRequest(CellCreateRequest request);
 
     Cell toUpdateRequest(CellUpdateRequest request);
+
+    List<CellCompactResponse> toListCompactResponse(List<Cell> cells);
 }

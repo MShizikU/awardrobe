@@ -33,4 +33,5 @@ public interface AgrMapper {
     AgrFullResponse toFullResponse(Agr agr, List<Cell> cells);
     Agr fromCreateRequest(AgrCreateRequest request);
     Agr fromUpdateRequest(AgrUpdateRequest request);
+    List<AgrCompactResponse> toListCompactResponse(List<Agr> agrs);
 }
