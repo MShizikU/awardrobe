@@ -75,6 +75,13 @@ public class User implements UserDetails {
     private UserRole role;
 
     /**
+     * Привязка к филиалу
+     */
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    /**
      * Проверка, является ли пользователь администратором
      *
      * @return true, если пользователь администратор

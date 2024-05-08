@@ -11,7 +11,8 @@ CREATE TABLE users(
     username TEXT UNIQUE,
     email TEXT UNIQUE, -- email address for login
     password TEXT, -- password for login, hashed with bcrypt
-    role_id INTEGER REFERENCES user_roles(id) NOT NULL
+    role_id INTEGER REFERENCES user_roles(id) NOT NULL,
+    company_id INTEGER REFERENCES companies(id)
 );
 
 CREATE TABLE companies(
@@ -37,7 +38,7 @@ CREATE TABLE agrs(
     status TEXT NOT NULL, -- active, inactive, deleted, blocked
     open_time TEXT NOT NULL,
     close_time TEXT NOT NULL,
-    executor_id INTEGER REFERENCES users(id) NOT NULL,
+    executor_id INTEGER REFERENCES users(id),
     branch_id INTEGER REFERENCES branches(id) NOT NULL
 );
 
@@ -52,7 +53,7 @@ CREATE TABLE cell(
 CREATE TABLE visit(
     id SERIAL PRIMARY KEY,
     start_time TIMESTAMP NOT NULL,
-    end_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP ,
     cell_id INTEGER REFERENCES cell(id) NOT NULL,
     user_id INTEGER REFERENCES users(id) NOT NULL
 );
