@@ -59,7 +59,7 @@ public class BranchController {
 
     @Operation(summary = "Удаление данных компании")
     @DeleteMapping("/branch/{branchId}")
-    public void delete(@PathVariable Long branchId){
+    public void deleteSafe(@PathVariable Long branchId){
         service.deleteByIdSoft(branchId);
     }
 }

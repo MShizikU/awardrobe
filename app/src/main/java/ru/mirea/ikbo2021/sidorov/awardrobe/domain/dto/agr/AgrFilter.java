@@ -2,8 +2,7 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.agr;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Краткий ответ на запрос гардеробного ряда")
-public record AgrCompactResponse(
+public record AgrFilter(
         @Schema(description = "Идентификатор гардеробного ряда", example = "1")
         Long id,
 

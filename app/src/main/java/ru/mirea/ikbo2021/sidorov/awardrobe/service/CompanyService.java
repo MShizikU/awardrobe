@@ -106,14 +106,7 @@ public class CompanyService {
 
         var manager = userService.getByIdStrict(company.getManager().getId());
 
-        try {
-            Status.valueOf(company.getStatus());
-            toUpdate.setStatus(company.getStatus());
-        }
-        catch (IllegalArgumentException e){
-            throw new EntityFieldNotValid("company","status", company.getStatus());
-        }
-
+        toUpdate.setStatus(company.getStatus());
         toUpdate.setInn(company.getInn());
         toUpdate.setPhysicalAddress(company.getPhysicalAddress());
         toUpdate.setLegalAddress(company.getLegalAddress());

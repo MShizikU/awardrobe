@@ -15,10 +15,10 @@ public record AgrFullResponse(
         @Schema(description = "Статус гардеробного ряда", example = "active")
         String status,
 
-        @Schema(description = "Время открытия", example = "2024-05-05 09:00:00")
+        @Schema(description = "Время открытия", example = "09:00")
         String open_time,
 
-        @Schema(description = "Время закрытия", example = "2024-05-05 18:00:00")
+        @Schema(description = "Время закрытия", example = "18:00")
         String close_time,
 
         @Schema(description = "Текущий исполнитель")

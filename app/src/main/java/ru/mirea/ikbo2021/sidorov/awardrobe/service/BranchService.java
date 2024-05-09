@@ -107,14 +107,7 @@ public class BranchService {
         var manager = userService.getByIdStrict(branch.getManager().getId());
         var company = companyService.getById(branch.getCompany().getId());
 
-        try {
-            Status.valueOf(request.getStatus());
-            branch.setStatus(request.getStatus());
-        }
-        catch (IllegalArgumentException e){
-            throw new EntityFieldNotValid("branch","status", company.getStatus());
-        }
-
+        branch.setStatus(request.getStatus());
         branch.setStatus(request.getStatus());
         branch.setName(request.getName());
         branch.setManager(manager);
