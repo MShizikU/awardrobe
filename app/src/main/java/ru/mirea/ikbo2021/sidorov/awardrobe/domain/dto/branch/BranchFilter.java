@@ -2,6 +2,7 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.branch;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Фильтрация филиалов")
 public record BranchFilter(
         @Schema(description = "Идентификатор филиала", example = "1")
         Long id,

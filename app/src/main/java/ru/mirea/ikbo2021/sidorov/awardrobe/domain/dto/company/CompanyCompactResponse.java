@@ -18,6 +18,6 @@ public record CompanyCompactResponse(
         @Schema(description = "Юридический адрес компании", example = "ул. Колотушкина, д. 1")
         String legal_address,
         @Schema(description = "Отвественный")
-        HiddenUserResponse user
+        HiddenUserResponse manager
 ) {
 }

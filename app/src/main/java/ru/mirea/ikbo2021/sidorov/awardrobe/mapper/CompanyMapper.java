@@ -15,21 +15,37 @@ import java.util.List;
 
 @Mapper(
         uses = {UserMapper.class, BranchMapper.class},
-        unmappedTargetPolicy = ReportingPolicy.ERROR,
+        unmappedTargetPolicy = ReportingPolicy.WARN,
         componentModel = "spring"
 )
 public interface CompanyMapper {
+
     @Mappings({
             @Mapping(target ="legal_address", source ="legalAddress"),
-            @Mapping(target = "legalAddress", source = "legal_address"),
-            @Mapping(target = "physical_address", source = "physicalAddress"),
-            @Mapping(target = "physicalAddress", source = "physical_address"),
-            @Mapping(target = "manager_id", source = "manager.id"),
-            @Mapping(target = "manager.id", source = "manager_id")
+            @Mapping(target = "physical_address", source = "physicalAddress")
     })
     CompanyCompactResponse toCompactResponse(Company company);
+
+    @Mappings({
+            @Mapping(target ="legal_address", source ="company.legalAddress"),
+            @Mapping(target = "physical_address", source = "company.physicalAddress")
+    })
     CompanyFullResponse toFullResponse(Company company, List<Branch> branches);
-    Company fromCreateRequest(CompanyCreationRequest request);
-    Company fromUpdateRequest(CompanyUpdateRequest request);
+
     List<CompanyCompactResponse> toListCompactResponse(List<Company> compacts);
+
+
+    @Mappings({
+            @Mapping(target = "legalAddress", source = "legal_address"),
+            @Mapping(target = "physicalAddress", source = "physical_address"),
+            @Mapping(target = "manager.id", source = "manager_id")
+    })
+    Company fromCreateRequest(CompanyCreationRequest request);
+
+    @Mappings({
+            @Mapping(target = "legalAddress", source = "legal_address"),
+            @Mapping(target = "physicalAddress", source = "physical_address"),
+            @Mapping(target = "manager.id", source = "manager_id")
+    })
+    Company fromUpdateRequest(CompanyUpdateRequest request);
 }

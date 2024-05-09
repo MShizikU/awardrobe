@@ -3,6 +3,7 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.company;
 import io.swagger.v3.oas.annotations.media.Schema;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.HiddenUserResponse;
 
+@Schema(description = "Фильтрация компаний")
 public record CompanyFilter(
         @Schema(description = "Идентификатор компании", example = "1")
         Long id,

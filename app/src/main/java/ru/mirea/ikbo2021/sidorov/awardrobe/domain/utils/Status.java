@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum Status {
     ACTIVE("active"),
     INACTIVE("inactive"),
+    INUSE("inuse"),
     BLOCKED("blocked"),
     DELETED("deleted");
 

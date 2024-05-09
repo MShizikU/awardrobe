@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Mapper(
         uses = {CellMapper.class, UserMapper.class, BranchMapper.class},
-        unmappedTargetPolicy = ReportingPolicy.ERROR,
+        unmappedTargetPolicy = ReportingPolicy.WARN,
         componentModel = "spring"
 )
 public interface AgrMapper {
@@ -23,15 +23,30 @@ public interface AgrMapper {
         @Mapping(target = "close_time", source = "closeTime"),
         @Mapping(target = "executor_id", source = "executor.id"),
         @Mapping(target = "branch_id", source = "branch.id"),
-        @Mapping(target = "openTime", source = "open_time"),
-        @Mapping(target = "closeTime", source = "close_time"),
-        @Mapping(target = "executor.id", source = "executor_id"),
-        @Mapping(target = "branch.id", source = "branch_id")
     })
-
     AgrCompactResponse toCompactResponse(Agr agr);
+
+    @Mappings({
+            @Mapping(target = "open_time", source = "agr.openTime"),
+            @Mapping(target = "close_time", source = "agr.closeTime")
+    })
     AgrFullResponse toFullResponse(Agr agr, List<Cell> cells);
+
+    @Mappings({
+            @Mapping(target = "openTime", source = "open_time"),
+            @Mapping(target = "closeTime", source = "close_time"),
+            @Mapping(target = "executor.id", source = "executor_id"),
+            @Mapping(target = "branch.id", source = "branch_id")
+    })
     Agr fromCreateRequest(AgrCreateRequest request);
+
+    @Mappings({
+            @Mapping(target = "openTime", source = "open_time"),
+            @Mapping(target = "closeTime", source = "close_time"),
+            @Mapping(target = "executor.id", source = "executor_id"),
+            @Mapping(target = "branch.id", source = "branch_id")
+    })
     Agr fromUpdateRequest(AgrUpdateRequest request);
+
     List<AgrCompactResponse> toListCompactResponse(List<Agr> agrs);
 }

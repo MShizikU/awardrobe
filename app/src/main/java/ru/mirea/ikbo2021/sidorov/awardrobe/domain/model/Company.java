@@ -31,6 +31,12 @@ public class Company {
     private String status;
 
     /**
+     * Название
+     */
+    @Column(name="name", nullable = false)
+    private String name;
+
+    /**
      * ИНН
      */
     @Column(name = "inn", unique = true, nullable = false)

@@ -6,13 +6,11 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.validation.validator.ValidStatus;
 
 @Schema(description = "Запрос на обновление ячейки")
 public record CellUpdateRequest(
+
         @Schema(description = "Статус ячейки", example = "active")
         @NotBlank(message = "Статус не может быть пустым")
         @ValidStatus(message = "Значение статуса недопустимо")
         String status,
-
-        @Schema(description = "ID текущего пользователя", example = "1")
-        Long user_id,
 
         @Schema(description = "ID гардеробного ряда", example = "1")
         @NotBlank(message = "Ряд не может быть пустым")

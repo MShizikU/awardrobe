@@ -30,7 +30,7 @@ public class AgrService {
      * Создание гардеробного ряда
      *
      * @param agr данные из запроса
-     * @return филиал
+     * @return гардеробный ряд
      */
     public Agr create(Agr agr){
         var executor = userService.getByIdStrict(agr.getExecutor().getId());

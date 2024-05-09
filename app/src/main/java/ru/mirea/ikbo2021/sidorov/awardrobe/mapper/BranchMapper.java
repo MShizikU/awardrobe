@@ -16,20 +16,28 @@ import java.util.List;
 
 @Mapper(
         uses = {AgrMapper.class, UserMapper.class, CompanyMapper.class},
-        unmappedTargetPolicy = ReportingPolicy.ERROR,
+        unmappedTargetPolicy = ReportingPolicy.WARN,
         componentModel = "spring"
 )
 public interface BranchMapper {
     @Mappings({
             @Mapping(target = "manager_id", source = "manager.id"),
-            @Mapping(target = "company_id", source = "company.id"),
+            @Mapping(target = "company_id", source = "company.id")
+    })
+    BranchCompactResponse toCompactResponse(Branch branch);
+
+    BranchFullResponse toFullResponse(Branch branch, List<Agr> agrs);
+
+    @Mappings({
             @Mapping(target = "manager.id", source = "manager_id"),
             @Mapping(target = "company.id", source = "company_id")
     })
-
-    BranchCompactResponse toCompactResponse(Branch branch);
-    BranchFullResponse toFullResponse(Branch branch, List<Agr> agrs);
     Branch fromCreateRequest(BranchCreateRequest request);
+
+    @Mappings({
+            @Mapping(target = "manager.id", source = "manager_id"),
+            @Mapping(target = "company.id", source = "company_id")
+    })
     Branch fromUpdateRequest(BranchUpdateRequest request);
     List<BranchCompactResponse> toListCompactResponse(List<Branch> branches);
 }

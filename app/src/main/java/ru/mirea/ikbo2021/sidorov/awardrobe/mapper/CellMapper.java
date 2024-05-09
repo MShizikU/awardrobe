@@ -14,7 +14,7 @@ import java.util.List;
 
 @Mapper(
         uses = { UserMapper.class, AgrMapper.class },
-        unmappedTargetPolicy = ReportingPolicy.ERROR,
+        unmappedTargetPolicy = ReportingPolicy.WARN,
         componentModel = "spring"
 )
 public interface CellMapper {
@@ -23,17 +23,23 @@ public interface CellMapper {
             @Mapping(target = "sequence_number", source = "sequenceNumber"),
             @Mapping(target = "user_id", source = "user.id"),
             @Mapping(target = "agr_id", source = "agr.id"),
-            @Mapping(target = "user.id", source = "user_id"),
-            @Mapping(target = "agr.id", source = "agr_id"),
-    })
 
+    })
     CellCompactResponse toCompactResponse(Cell cell);
 
+    @Mapping(target = "sequence_number", source = "sequenceNumber")
     CellFullResponse toFullResponse(Cell cell);
 
-    Cell toCreateRequest(CellCreateRequest request);
+    @Mappings({
+            @Mapping(target = "user.id", source = "user_id"),
+            @Mapping(target = "agr.id", source = "agr_id")
+    })
+    Cell fromCreateRequest(CellCreateRequest request);
 
-    Cell toUpdateRequest(CellUpdateRequest request);
+    @Mappings({
+            @Mapping(target = "agr.id", source = "agr_id")
+    })
+    Cell fromUpdateRequest(CellUpdateRequest request);
 
     List<CellCompactResponse> toListCompactResponse(List<Cell> cells);
 }
