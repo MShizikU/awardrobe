@@ -23,31 +23,21 @@ import java.util.List;
 )
 public interface VisitMapper {
     @Mappings({
-            @Mapping(target = "start_time", source = "startTime"),
-            @Mapping(target = "end_time", source = "endTime"),
             @Mapping(target = "user_id", source = "user.id"),
             @Mapping(target = "cell_id", source = "cell.id")
     })
     VisitCompactResponse toCompatResponse(Visit visit);
 
-    @Mappings({
-            @Mapping(target = "start_time", source = "startTime"),
-            @Mapping(target = "end_time", source = "endTime")
-    })
     VisitFullResponse toFullResponse(Visit visit);
     List<VisitCompactResponse> toListCompactResponse(List<Visit> visits);
 
     @Mappings({
-            @Mapping(target = "startTime", source = "start_time"),
-            @Mapping(target = "endTime", source = "end_time"),
             @Mapping(target = "user.id", source = "user_id"),
             @Mapping(target = "cell.id", source = "cell_id"),
     })
     Visit fromCreateRequest(VisitCreateRequest request);
 
     @Mappings({
-            @Mapping(target = "startTime", source = "start_time"),
-            @Mapping(target = "endTime", source = "end_time"),
             @Mapping(target = "user.id", source = "user_id"),
             @Mapping(target = "cell.id", source = "cell_id"),
     })

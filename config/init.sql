@@ -5,14 +5,12 @@ CREATE TABLE user_roles(
 
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
-    hashcode TEXT NOT NULL UNIQUE,
     is_disposable BOOLEAN NOT NULL,
     status TEXT NOT NULL, -- active, inactive, deleted, blocked
     username TEXT UNIQUE,
-    email TEXT UNIQUE, -- email address for login
+    email TEXT, -- email address for login
     password TEXT, -- password for login, hashed with bcrypt
-    role_id INTEGER REFERENCES user_roles(id) NOT NULL,
-    company_id INTEGER REFERENCES companies(id)
+    role_id INTEGER REFERENCES user_roles(id) NOT NULL
 );
 
 CREATE TABLE companies(
@@ -24,6 +22,8 @@ CREATE TABLE companies(
     legal_address TEXT NOT NULL,
     manager_id INTEGER REFERENCES users(id) NOT NULL
 );
+
+ALTER TABLE users ADD COLUMN company_id INTEGER REFERENCES companies(id);
 
 CREATE TABLE branches(
     id SERIAL PRIMARY KEY,

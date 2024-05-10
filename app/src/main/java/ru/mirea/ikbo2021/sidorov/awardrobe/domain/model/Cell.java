@@ -29,7 +29,7 @@ public class Cell {
      * Порядковый номер
      */
     @Column(name = "sequence_number", nullable = false)
-    private Integer sequenceNumber;
+    private Integer sequence_number;
 
     /**
      * Родительский автоматизированный гардеробный ряд
@@ -42,6 +42,6 @@ public class Cell {
      * Текущий пользователь
      */
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 }

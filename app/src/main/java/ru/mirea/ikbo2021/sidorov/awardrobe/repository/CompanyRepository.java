@@ -20,8 +20,8 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
             "AND (:name IS null OR c.status LIKE %:name%) " +
             "AND (:status IS null OR c.status LIKE %:status%) " +
             "AND (:inn IS null OR c.inn LIKE %:inn%) " +
-            "AND (:physicalAddress IS null OR c.physicalAddress LIKE %:status%) " +
-            "AND (:legalAddress IS null OR c.legalAddress LIKE %:legalAddress%)" +
+            "AND (:physicalAddress IS null OR c.physical_address LIKE %:status%) " +
+            "AND (:legalAddress IS null OR c.legal_address LIKE %:legalAddress%)" +
             "AND (:manager_id IS null OR c.manager.id = :manager_id)")
     List<Company> findAllWithFilter(Long id, String status, String inn, String physicalAddress, String legalAddress, Long manager_id);
 }

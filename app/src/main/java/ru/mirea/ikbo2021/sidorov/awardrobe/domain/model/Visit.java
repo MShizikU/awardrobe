@@ -22,10 +22,10 @@ public class Visit {
     private Long id;
 
     @Column(name = "start_time", nullable = false)
-    private Timestamp startTime;
+    private Timestamp start_time;
 
     @Column(name = "end_time", nullable = false)
-    private Timestamp endTime;
+    private Timestamp end_time;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "cell_id")

@@ -15,7 +15,7 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Branch;
 import java.util.List;
 
 @Mapper(
-        uses = {AgrMapper.class, UserMapper.class, CompanyMapper.class},
+        uses = {AgrMapper.class, UserMapper.class},
         unmappedTargetPolicy = ReportingPolicy.WARN,
         componentModel = "spring"
 )

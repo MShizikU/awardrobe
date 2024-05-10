@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.agr.AgrFilter;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Agr;
-import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Branch;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils.Status;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityNotFound;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.AgrRepository;
@@ -40,8 +39,8 @@ public class AgrService {
         return save(
                 Agr.builder()
                         .status(agr.getStatus())
-                        .openTime(agr.getOpenTime())
-                        .closeTime(agr.getCloseTime())
+                        .open_time(agr.getOpen_time())
+                        .close_time(agr.getClose_time())
                         .executor(executor)
                         .branch(branch)
                         .build()
@@ -110,8 +109,8 @@ public class AgrService {
         var branch = branchService.getById(request.getBranch().getId());
 
         agr.setStatus(request.getStatus());
-        agr.setOpenTime(request.getOpenTime());
-        agr.setCloseTime(request.getCloseTime());
+        agr.setOpen_time(request.getOpen_time());
+        agr.setClose_time(request.getClose_time());
         agr.setBranch(branch);
 
         return save(agr);

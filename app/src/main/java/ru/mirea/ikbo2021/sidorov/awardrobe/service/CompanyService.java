@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.company.CompanyFilter;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Company;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils.Status;
-import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityFieldNotValid;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityNotFound;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.CompanyRepository;
 
@@ -41,8 +40,9 @@ public class CompanyService {
                 Company.builder()
                         .status(company.getStatus())
                         .inn(company.getInn())
-                        .physicalAddress(company.getPhysicalAddress())
-                        .legalAddress(company.getLegalAddress())
+                        .name(company.getName())
+                        .physical_address(company.getPhysical_address())
+                        .legal_address(company.getLegal_address())
                         .manager(manager)
                         .build()
         );
@@ -108,8 +108,8 @@ public class CompanyService {
 
         toUpdate.setStatus(company.getStatus());
         toUpdate.setInn(company.getInn());
-        toUpdate.setPhysicalAddress(company.getPhysicalAddress());
-        toUpdate.setLegalAddress(company.getLegalAddress());
+        toUpdate.setPhysical_address(company.getPhysical_address());
+        toUpdate.setLegal_address(company.getLegal_address());
         toUpdate.setManager(manager);
 
         return repository.save(toUpdate);

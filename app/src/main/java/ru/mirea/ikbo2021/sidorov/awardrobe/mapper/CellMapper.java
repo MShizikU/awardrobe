@@ -13,25 +13,28 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Cell;
 import java.util.List;
 
 @Mapper(
-        uses = { UserMapper.class, AgrMapper.class },
+        uses = { UserMapper.class},
         unmappedTargetPolicy = ReportingPolicy.WARN,
         componentModel = "spring"
 )
 public interface CellMapper {
 
     @Mappings({
-            @Mapping(target = "sequence_number", source = "sequenceNumber"),
             @Mapping(target = "user_id", source = "user.id"),
             @Mapping(target = "agr_id", source = "agr.id"),
 
     })
     CellCompactResponse toCompactResponse(Cell cell);
 
-    @Mapping(target = "sequence_number", source = "sequenceNumber")
+    @Mappings(
+            {
+                    @Mapping(target = "agr.executor_id", source = "cell.agr.executor.id"),
+                    @Mapping(target = "agr.branch_id", source = "cell.agr.branch.id")
+            }
+    )
     CellFullResponse toFullResponse(Cell cell);
 
     @Mappings({
-            @Mapping(target = "user.id", source = "user_id"),
             @Mapping(target = "agr.id", source = "agr_id")
     })
     Cell fromCreateRequest(CellCreateRequest request);

@@ -42,7 +42,7 @@ public class AgrController {
     }
 
     @Operation(summary = "Получение фильтрованного списка гардеробных рядов")
-    @GetMapping("/args/filter")
+    @GetMapping("/agrs/filter")
     public List<AgrCompactResponse> getByFilter(@RequestBody @Valid AgrFilter filter){
         var agrs = service.getByFilter(filter);
         return mapper.toListCompactResponse(agrs);

@@ -3,14 +3,13 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.visit.VisitFilter;
-import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.User;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Cell;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Visit;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityNotFound;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.visit.VisitAlreadyExists;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.VisitRepository;
 
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -18,7 +17,6 @@ import java.util.List;
 public class VisitService {
     private final VisitRepository repository;
     private final UserService userService;
-    private final CellService cellService;
 
     /**
      * Сохранение данных о визите
@@ -33,17 +31,16 @@ public class VisitService {
     /**
      * Создание визита
      * @param user_id ID посетителя
-     * @param cell_id ID ячейки
+     * @param cell ID ячейка
      */
-    public void createVisit(Long user_id, Long cell_id){
+    public void createVisit(Long user_id, Cell cell){
         var user = userService.getByIdStrict(user_id);
-        var cell = cellService.getByIdStrict(cell_id);
 
-        if (repository.findByUserIdAndEndTime(user_id, null).isPresent()) throw new VisitAlreadyExists(user_id, cell_id);
+        if (repository.findByUserIdAndEndTime(user_id, null).isPresent()) throw new VisitAlreadyExists(user_id, cell.getId());
 
         save(
                 Visit.builder()
-                        .startTime(new Timestamp(System.currentTimeMillis()))
+                        .start_time(new Timestamp(System.currentTimeMillis()))
                         .user(user)
                         .cell(cell)
                         .build()
@@ -60,7 +57,7 @@ public class VisitService {
         if (visit.isEmpty()) throw new EntityNotFound("visit", "user_id", user_id.toString());
         var toUpdate = visit.get();
         toUpdate.setUser(null);
-        toUpdate.setEndTime(new Timestamp(System.currentTimeMillis()));
+        toUpdate.setEnd_time(new Timestamp(System.currentTimeMillis()));
         save(
             toUpdate
         );

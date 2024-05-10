@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 
 @Data
 @Entity
@@ -32,13 +30,13 @@ public class Agr {
      * Время начала работы
      */
     @Column(name = "open_time", nullable = false)
-    private String openTime;
+    private String open_time;
 
     /**
      * Время окончания работы
      */
     @Column(name = "close_time", nullable = false)
-    private String closeTime;
+    private String close_time;
 
     /**
      * Текущий исполнитель

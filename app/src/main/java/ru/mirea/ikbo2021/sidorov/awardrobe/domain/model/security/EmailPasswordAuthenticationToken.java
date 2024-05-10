@@ -1,7 +1,9 @@
 package ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.security;
 
+import lombok.Getter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
+@Getter
 public class EmailPasswordAuthenticationToken extends AbstractAuthenticationToken {
     private final String email;
     private final String password;
@@ -10,14 +12,6 @@ public class EmailPasswordAuthenticationToken extends AbstractAuthenticationToke
         super(null);
         this.email = email;
         this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override

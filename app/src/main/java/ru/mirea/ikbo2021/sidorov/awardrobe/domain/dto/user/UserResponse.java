@@ -25,9 +25,6 @@ public record UserResponse (
     @Schema(description = "Статус пользователя", example = "active")
     String status,
 
-    @Schema(description = "Телефонный номер пользователя", example = "sidorov@example.com")
-    String phone,
-
     @Schema(description = "Роль пользователя", example = "USER")
     UserRole role
 

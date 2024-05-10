@@ -38,11 +38,6 @@ public class CellService {
      * @return ячейка
      */
     public Cell create(Cell cell){
-        User user = null;
-        if (cell.getUser() != null)
-        {
-            user = userService.getByIdStrict(cell.getUser().getId());
-        }
 
         var agr = agrService.getByIdStrict(cell.getAgr().getId());
 
@@ -51,9 +46,8 @@ public class CellService {
         return save(
                 Cell.builder()
                         .status(cell.getStatus())
-                        .sequenceNumber((sequenceNumber != null ? sequenceNumber + 1 : 1))
+                        .sequence_number((sequenceNumber != null ? sequenceNumber + 1 : 1))
                         .agr(agr)
-                        .user(user)
                         .build()
         );
     }
@@ -75,7 +69,7 @@ public class CellService {
             cells.add(save(
                     Cell.builder()
                             .status(Status.ACTIVE.getStatus())
-                            .sequenceNumber(sequenceNumber + i)
+                            .sequence_number(sequenceNumber + i)
                             .user(null)
                             .agr(agr)
                             .build()
@@ -160,7 +154,7 @@ public class CellService {
         if (freeCells.isEmpty()) throw new EntityNotFound("cell", "status", "active");
 
         Cell freeCell = freeCells.getFirst();
-        visitService.createVisit(user_id, agr_id);
+        visitService.createVisit(user_id, freeCell);
         freeCell.setUser(user);
         freeCell.setStatus(Status.INUSE.getStatus());
         return save(freeCell);

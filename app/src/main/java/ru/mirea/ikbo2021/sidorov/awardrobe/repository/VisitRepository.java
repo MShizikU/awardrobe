@@ -19,5 +19,6 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
     )
     public List<Visit> findByFilter(Long id, Long cell_id, Long user_id);
 
+    @Query("SELECT v FROM Visit v WHERE v.user.id = :user_id AND v.end_time = :endTime")
     public Optional<Visit> findByUserIdAndEndTime(Long user_id, Timestamp endTime);
 }

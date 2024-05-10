@@ -17,12 +17,12 @@ public interface CellRepository  extends JpaRepository<Cell, Long> {
     @Query("SELECT c FROM Cell c WHERE " +
             "(:id is NULL OR c.id = :id) " +
             "AND (:status IS null OR c.status LIKE %:status%) " +
-            "AND (:sequenceNumber is NULL OR c.sequenceNumber = :sequenceNumber) " +
+            "AND (:sequenceNumber is NULL OR c.sequence_number = :sequenceNumber) " +
             "AND (:user_id IS null OR c.user.id = :user_id) " +
             "AND (:agr_id IS null OR c.agr.id = :agr_id)"
     )
     List<Cell> findWithFilter(Long id, String status, Integer sequenceNumber, Long user_id, Long agr_id);
 
-    @Query("SELECT MAX(c.sequenceNumber) FROM Cell c WHERE c.agr.id = :agrId AND c.status LIKE 'active'")
+    @Query("SELECT MAX(c.sequence_number) FROM Cell c WHERE c.agr.id = :agrId AND c.status LIKE 'active'")
     Integer findSequenceMax(@Param("agrId") Long agrId);
 }
