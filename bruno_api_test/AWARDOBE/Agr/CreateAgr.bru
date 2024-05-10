@@ -1,0 +1,21 @@
+meta {
+  name: CreateAgr
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base}}/agr
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "status" : "ACTIVE",
+    "open_time" : "09:00",
+    "close_time" : "18:00",
+    "executor_id" : 1,
+    "branch_id" : 1
+  }
+}

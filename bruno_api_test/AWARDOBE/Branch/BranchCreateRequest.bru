@@ -1,0 +1,20 @@
+meta {
+  name: BranchCreateRequest
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base}}/branch
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "status" : "ACTIVE",
+    "name" : "Филиал №1",
+    "manager_id" : 1,
+    "company_id" : 1
+  }
+}
