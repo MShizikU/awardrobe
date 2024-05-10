@@ -21,7 +21,7 @@ public record CompanyFullResponse(
         @Schema(description = "Юридический адрес компании", example = "ул. Колотушкина, д. 1")
         String legal_address,
         @Schema(description = "Отвественный")
-        HiddenUserResponse user,
+        HiddenUserResponse manager,
 
         @Schema(description = "Список филиалов")
         List<BranchCompactResponse> branches

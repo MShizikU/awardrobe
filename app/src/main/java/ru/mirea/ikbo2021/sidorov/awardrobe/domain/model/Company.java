@@ -31,6 +31,12 @@ public class Company {
     private String status;
 
     /**
+     * Название
+     */
+    @Column(name="name", nullable = false)
+    private String name;
+
+    /**
      * ИНН
      */
     @Column(name = "inn", unique = true, nullable = false)
@@ -40,13 +46,13 @@ public class Company {
      * Физический адрес
      */
     @Column(name = "physical_address", nullable = false)
-    private String physicalAddress;
+    private String physical_address;
 
     /**
      * Юридический адрес
      */
     @Column(name = "legal_address", nullable = false)
-    private String legalAddress;
+    private String legal_address;
 
     /**
      * Ответсвенный

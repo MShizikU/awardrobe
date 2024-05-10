@@ -32,12 +32,6 @@ public class User implements UserDetails {
     private Long id;
 
     /**
-     * Уникальный код пользователя
-     */
-    @Column(name = "hashcode", unique = false, nullable = false)
-    private String hashcode;
-
-    /**
      * Является ли пользователь удаляемым
      */
     @Column(name = "is_disposable", nullable = false)
@@ -75,38 +69,19 @@ public class User implements UserDetails {
     private UserRole role;
 
     /**
+     * Привязка к филиалу
+     */
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    /**
      * Проверка, является ли пользователь администратором
      *
      * @return true, если пользователь администратор
      */
     public boolean isAdmin() {
         return Objects.equals(role.getName(), "ADMIN");
-    }
-
-    /**
-     * Вычисление hashcode пользователя
-     *
-     * @return void
-     */
-    public void genHash(){
-        MessageDigest digest = null;
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException ignored) {
-
-        }
-        byte[] hashedBytes = digest.digest((this.username + " " + this.email).getBytes());
-
-        StringBuilder hexString = new StringBuilder();
-        for (byte b : hashedBytes) {
-            String hex = Integer.toHexString(0xff & b);
-            if (hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-
-        this.hashcode = hexString.toString();
     }
 
     @Override

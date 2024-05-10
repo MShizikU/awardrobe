@@ -2,6 +2,7 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.service.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.auth.JwtAuthenticationResponse;
@@ -32,24 +33,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
         var relatedRole = roleRepository.findByName(request.role());
         var userRole = relatedRole.isEmpty() ? roleRepository.findByName("USER").get() : relatedRole.get();
-        MessageDigest digest = null;
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException ignored) {
 
-        }
-        byte[] hashedBytes = digest.digest((request.username() + " " + request.email()).getBytes());
-
-        StringBuilder hexString = new StringBuilder();
-        for (byte b : hashedBytes) {
-            String hex = Integer.toHexString(0xff & b);
-            if (hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-
-        String hash = hexString.toString();
         var user = User.builder()
                 .username(request.username())
                 .email(request.email())
@@ -57,7 +41,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(userRole)
                 .isDisposable(false)
                 .status("active")
-                .hashcode(hash)
                 .build();
 
         userService.create(user);
@@ -68,7 +51,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public JwtAuthenticationResponse signIn(SignInRequest request) {
-        authenticationManager.authenticate(new EmailPasswordAuthenticationToken(
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.username(),
                 request.password()
         ));
