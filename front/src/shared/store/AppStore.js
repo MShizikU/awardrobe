@@ -2,15 +2,23 @@ import {makeAutoObservable} from "mobx";
 import UserStore from "./modules/UserStore";
 import {message, notification} from "antd";
 import CompanyStore from "./modules/CompanyStore";
+import BranchStore from "./modules/BranchStore";
+import AgrStore from "./modules/AgrStore";
+import CellStore from "./modules/CellStore";
 
 export default class AppStore {
 
     users = new UserStore(this);
     companies = new CompanyStore(this);
+    branches = new BranchStore(this);
+    agrs = new AgrStore(this);
+    cells = new CellStore(this);
 
     userState = null;
     isAuthState = false;
     isSuperAdminState = null;
+
+    isLoading = false;
 
     get isAuth() {
         return this.isAuthState;
@@ -40,6 +48,8 @@ export default class AppStore {
         makeAutoObservable(this, {
                 users: false,
              companies: false,
+            branches: false,
+                agrs: false
             },
             {
                 deep: true
@@ -122,5 +132,19 @@ export default class AppStore {
 
     isExecutor(): boolean {
         return this.user?.role.name === 'EXECUTOR' || this.isAdmin();
+    }
+
+    performRequest = async (request) => {
+        try {
+            this.isLoading = true;
+            const response = await request;
+            return response.data;
+        }
+        catch (e) {
+            this.httpError(e);
+        }
+        finally {
+            this.isLoading = false;
+        }
     }
 }

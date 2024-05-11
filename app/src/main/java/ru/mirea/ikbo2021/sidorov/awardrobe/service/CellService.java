@@ -90,6 +90,12 @@ public class CellService {
         return cell.get();
     }
 
+    public List<Cell> getUserCell(){
+        User user = userService.getCurrentUser();
+        var cells = repository.findWithFilter(null, Status.INUSE.getStatus(),null, user.getId(), null);
+        return cells;
+    }
+
     /**
      * Получение списка ячеек по ID нардеробного ряда
      *
