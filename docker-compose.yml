@@ -12,8 +12,8 @@ services:
       - "5433:5432"
     volumes:
       - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./config/init-data.sql:/docker-entrypoint-initdb.d/test-init-data.sql
-      - ./config/init-data.sql:/docker-entrypoint-initdb.d/test-data.sql
+      - ./config/init-data.sql:/docker-entrypoint-initdb.d/test-adata.sql
+      - ./config/test-data.sql:/docker-entrypoint-initdb.d/test-bdata.sql
 
   app:
     build:

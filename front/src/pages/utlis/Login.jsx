@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Form from '../../enities/Form/Form'
 import {Context} from "../../index";
@@ -8,12 +8,17 @@ import {observer} from "mobx-react-lite";
 const Login = () => {
     const {store} = useContext(Context);
     const navigate = useNavigate()
+    useEffect(() => {
+        if (store.isAuth) {
+            navigate('/user');
+        }
+    }, [navigate, store.isAuth]);
     return (
         <PageThemplate
             label = {'Вход'}
         >
             <Form
-                label={"Введите данные для входа"}
+                label={"Введите данные для входа"}IsaUTH
                 fields={[
                     {
                         type: 'text',
@@ -39,4 +44,4 @@ const Login = () => {
     );
 };
 
-export default observer(Login);
+export default Login;

@@ -1,0 +1,22 @@
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    background: var(--gray-ml20);
+}
+
+.modal_content {
+    padding: 25px;
+    border-radius: 8px;
+    min-width: 250px;
+    background: var(--white);
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

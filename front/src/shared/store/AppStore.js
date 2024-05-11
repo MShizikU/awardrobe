@@ -1,10 +1,11 @@
-import {makeAutoObservable} from "mobx";
+import {action, computed, makeAutoObservable, observable} from "mobx";
 import UserStore from "./modules/UserStore";
 import {message, notification} from "antd";
 import CompanyStore from "./modules/CompanyStore";
 import BranchStore from "./modules/BranchStore";
 import AgrStore from "./modules/AgrStore";
 import CellStore from "./modules/CellStore";
+import {useNavigate} from "react-router-dom";
 
 export default class AppStore {
 
@@ -46,10 +47,18 @@ export default class AppStore {
 
     constructor() {
         makeAutoObservable(this, {
-                users: false,
-             companies: false,
+            users: false,
+            companies: false,
             branches: false,
-                agrs: false
+            agrs: false,
+            cells: false,
+            isAuthState: observable,
+            isAuth: computed,
+            isAdmin: action.bound,
+            isExecutor: action.bound,
+            userState: observable,
+            user: computed,
+            checkSuperAdmin: action.bound
             },
             {
                 deep: true
@@ -138,6 +147,7 @@ export default class AppStore {
         try {
             this.isLoading = true;
             const response = await request;
+            console.log(response);
             return response.data;
         }
         catch (e) {
@@ -146,5 +156,6 @@ export default class AppStore {
         finally {
             this.isLoading = false;
         }
+        return [];
     }
 }

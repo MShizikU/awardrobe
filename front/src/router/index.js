@@ -4,11 +4,11 @@ import ChooseCompanyPage from "../pages/awardobe/ChooseCompanyPage";
 import ChooseBranchPage from "../pages/awardobe/ChooseBranchPage";
 import ChooseAgrPage from "../pages/awardobe/ChooseAgrPage";
 import PerformAutomativeWardrobe from "../pages/awardobe/PerformAutomativeWardrobe";
-import CompaniesPage from "../pages/admin/CompaniesPage";
+import CompaniesPage from "../pages/admin/CompaniesPage/CompaniesPage";
 import BranchesPage from "../pages/admin/BranchesPage";
 import AgrsPage from "../pages/admin/AgrsPage";
 import CellsPage from "../pages/admin/CellsPage";
-import UserPage from "../pages/utlis/UserPage";
+import UserPage from "../pages/utlis/UserPage/UserPage";
 
 export const adminRoutes = [
     { path: "/admin/companies", element: <CompaniesPage />, exact: true },

@@ -1,0 +1,35 @@
+.horizontal_block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user_info{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.info_row{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info_title{
+    font-size: 20px;
+    color: var(--brown);
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.info_value{
+    font-size: 18px;
+    color: var(--brown);
+    font-weight: 500;
+    line-height: 21px;
+}

@@ -3,11 +3,13 @@ import {Context} from "../index";
 import { Route, Routes} from "react-router-dom";
 import {adminRoutes, executorRoutes, publicRoutes, userRoutes} from '../router';
 import Login from "../pages/utlis/Login";
-import CompaniesPage from "../pages/admin/CompaniesPage";
-import UserPage from "../pages/utlis/UserPage";
+import CompaniesPage from "../pages/admin/CompaniesPage/CompaniesPage";
+import UserPage from "../pages/utlis/UserPage/UserPage";
+import {observer} from "mobx-react-lite";
 
 const AppRouter = () => {
     const {store} = useContext(Context);
+
     return (
         store.isAuth
             ?
@@ -64,4 +66,4 @@ const AppRouter = () => {
     );
 };
 
-export default AppRouter;
+export default observer(AppRouter);

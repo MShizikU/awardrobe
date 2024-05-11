@@ -50,4 +50,8 @@ export default class CellStore{
 
     deleteCell = async(id) => await this.rootStore.performRequest($api.delete(`/cell/${id}`));
 
+    getCurrentCell = async (id) => {
+        await $api.post(`/cell/user`);
+    }
+
 }

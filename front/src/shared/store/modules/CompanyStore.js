@@ -74,7 +74,8 @@ export default class CompanyStore{
     getAllCompanies = async () => {
         try {
             this.isLoadingState = true;
-            const response = $api.get('/companies');
+            const response = await $api.get('/companies');
+            console.log(response);
             return response.data;
         } catch (e) {
             this.rootStore.httpError(e);

@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {Link, Route, Routes, useNavigate} from "react-router-dom";
 import cls from "./Navbar.module.css";
 import {Context} from "../../../index";
+import {observer} from "mobx-react-lite";
 
 const Navbar = () => {
     const {store} = useContext(Context);
@@ -52,4 +53,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default observer(Navbar);

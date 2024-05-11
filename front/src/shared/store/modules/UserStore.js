@@ -22,11 +22,16 @@ export default class UserStore {
     }
 
 
-    register = async (values) => {
+    register = async (username, email, password) => {
         try {
             this.isLoadingState = true;
             delete values.confirm;
-            const response = await $api.post('/auth/sign-up', values);
+            const response = await $api.post('/auth/sign-up', {
+                username: username,
+                email: email,
+                password: password,
+                role: "USER"
+            });
             localStorage.setItem('token', response.data.token);
             this.rootStore.loadUser(response.data.token);
             message.info('Добро пожаловать, ' + this.rootStore.user.username + "!");
