@@ -18,7 +18,7 @@ const Login = () => {
             label = {'Вход'}
         >
             <Form
-                label={"Введите данные для входа"}IsaUTH
+                label={"Введите данные для входа"}
                 fields={[
                     {
                         type: 'text',

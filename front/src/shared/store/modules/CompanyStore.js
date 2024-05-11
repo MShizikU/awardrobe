@@ -42,7 +42,7 @@ export default class CompanyStore{
     getFullCompany = async (id) => {
         try {
             this.isLoadingState = true;
-            const response = $api.get('/company/' + id);
+            const response = await $api.get('/company/' + id);
             return response.data;
         } catch (e) {
             this.rootStore.httpError(e);
@@ -54,7 +54,7 @@ export default class CompanyStore{
     getCompaniesByFilter = async (id, status, name, inn, p_address, l_address, manager_id) => {
         try {
             this.isLoadingState = true;
-            const response = $api.post('/companies/filter', {
+            const response = await $api.post('/companies/filter', {
                 id: id,
                 status: status,
                 name: name,
@@ -87,14 +87,14 @@ export default class CompanyStore{
     updateCompany = async (id, status, name, inn, p_address, l_address, manager_id) => {
         try {
             this.isLoadingState = true;
-            const response = $api.put('/company/' + id, {
+            const response= await $api.put('/company/' + id, {
                 status: status,
                 name: name,
                 inn: inn,
                 physical_address: p_address,
                 legal_address: l_address,
                 manager_id: manager_id
-            })
+            });
             return response.data;
         } catch (e) {
             this.rootStore.httpError(e);
@@ -106,7 +106,7 @@ export default class CompanyStore{
     deleteCompany = async (id) => {
         try {
             this.isLoadingState = true;
-            const response = $api.delete("/company/" + id)
+            const response = await $api.delete("/company/" + id);
             return response.data;
         } catch (e) {
             this.rootStore.httpError(e);

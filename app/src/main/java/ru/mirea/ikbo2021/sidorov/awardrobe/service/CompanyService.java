@@ -111,6 +111,7 @@ public class CompanyService {
         toUpdate.setPhysical_address(company.getPhysical_address());
         toUpdate.setLegal_address(company.getLegal_address());
         toUpdate.setManager(manager);
+        toUpdate.setName(company.getName());
 
         return repository.save(toUpdate);
 

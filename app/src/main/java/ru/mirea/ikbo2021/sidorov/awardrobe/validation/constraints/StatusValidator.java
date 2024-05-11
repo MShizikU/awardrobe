@@ -22,7 +22,7 @@ public class StatusValidator implements ConstraintValidator<ValidStatus, String>
             return nullable;
         }
         try {
-            Status status = Status.valueOf(s);
+            Status status = Status.valueOf(s.toUpperCase());
         } catch (IllegalArgumentException | NullPointerException e) {
             return false;
         }

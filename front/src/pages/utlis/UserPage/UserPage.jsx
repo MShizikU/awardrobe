@@ -56,9 +56,6 @@ const UserPage = () => {
                         }>Выйти</Button>
                 </div>
             </div>
-
-
-
         </PageThemplate>
     );
 };
