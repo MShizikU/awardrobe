@@ -37,7 +37,7 @@ public class CompanyController {
 
     @Operation(summary = "Получение пользователей по фильтру")
     @PostMapping("/companies/filter")
-    public List<CompanyCompactResponse> findPostsByFilter(@RequestBody @Valid CompanyFilter filter) {
+    public List<CompanyCompactResponse> getCompaniesByFilter(@RequestBody @Valid CompanyFilter filter) {
         var companies = service.findByFilter(filter);
         return mapper.toListCompactResponse(companies);
     }
@@ -57,7 +57,7 @@ public class CompanyController {
     }
 
     @Operation(summary = "Удаление данных компании")
-    @DeleteMapping("/{companyId}")
+    @DeleteMapping("/company/{companyId}")
     public void deleteCompany(@PathVariable Long companyId){
         service.deleteByIdSoft(companyId);
     }

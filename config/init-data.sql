@@ -1,7 +1,5 @@
 INSERT INTO user_roles (name) VALUES
     ('ADMIN'),
-    ('MANAGER'),
-    ('OBSERVER'),
     ('EXECUTOR'),
     ('USER');
 

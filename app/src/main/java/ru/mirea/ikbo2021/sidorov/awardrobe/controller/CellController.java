@@ -46,7 +46,7 @@ public class CellController {
     }
 
     @Operation(summary = "Получение отфильтрованного списка ячеек")
-    @GetMapping("/cells/filter")
+    @PostMapping("/cells/filter")
     public List<CellCompactResponse> getCellsFiltered(@RequestBody @Valid CellFilter filter){
         List<Cell> cells = service.getByFilter(filter);
         return mapper.toListCompactResponse(cells);

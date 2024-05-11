@@ -44,7 +44,7 @@ public class BranchController {
     }
 
     @Operation(summary = "Получение фильтрованнаго списка филиалов")
-    @GetMapping("/branches/filter")
+    @PostMapping("/branches/filter")
     public List<BranchCompactResponse> getAllByFilter(@RequestBody @Valid BranchFilter filter){
         var branches = service.getByFilter(filter);
         return mapper.toListCompactResponse(branches);

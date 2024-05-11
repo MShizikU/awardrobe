@@ -1,0 +1,17 @@
+:root {
+    --white: #FFFFFF;
+    --brown: #2E1114;
+    --red: #501B1D;
+    --purple: #64485C;
+    --lavand : #83677B;
+    --gray: #ADADAD;
+    --gray-ll: #F6F6F6;
+    --gray-light: #ECECEC;
+    --medium: #DEDEDE;
+    --gray-ml: #C8C4CA;
+    --gray-ml20: #C8C4CA20;
+    --gray-medium: #918C93;
+    --gray-dark-medium: #504F51;
+    --gray-dark-medium-opacity: #504F5199;
+    --gray-drk-medium-op30: #504F5130;
+}

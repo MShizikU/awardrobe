@@ -1,0 +1,44 @@
+.form_wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 20px;
+}
+
+.form_label{
+    font-size: 24px;
+    color: var(--brown);
+    font-weight: 500;
+
+}
+
+.form{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: clamp(15px, 2vw, 20px);
+    color: var(--brown);
+    max-width: 500px;
+}
+
+.form > *{
+    flex-grow: 1;
+}
+
+.form  button{
+    width: 50% !important;
+}
+
+.button_row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: start;
+}

@@ -3,10 +3,7 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.visit.VisitCompactResponse;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.visit.VisitFilter;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.visit.VisitFullResponse;
@@ -30,7 +27,7 @@ public class VisitController {
     }
 
     @Operation(summary = "Получение визитов с фильтрами")
-    @GetMapping("/visits/filter")
+    @PostMapping("/visits/filter")
     public List<VisitCompactResponse> getVisitsWithFilter(@RequestBody @Valid VisitFilter filter){
         List<Visit> visits = service.getByFilter(filter);
         return mapper.toListCompactResponse(visits);
