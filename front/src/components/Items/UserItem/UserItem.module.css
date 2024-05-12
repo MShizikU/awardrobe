@@ -1,4 +1,4 @@
-.branch_folder{
+.user_item{
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -9,24 +9,24 @@
     border: 1px solid transparent;
 }
 
-.branch_folder:hover{
+.user_item:hover{
     border: 1px solid var(--red);
     box-shadow: 0 6px 30px 0 rgba(161, 74, 150, 0.2);
 }
-
-.branch_top_row{
+.user_top_row{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
-.branch_actions{
+.user_actions{
     width: fit-content;
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
 
-.branch_name{
+.user_name{
     flex: 1 0 auto;
     font-size: 24px;
     color: var(--brown);
@@ -38,26 +38,27 @@
     align-items: center;
 }
 
-.branch_id{
+.user_id{
     font-size: 20px;
     color: var(--gray-medium);
     line-height: 20px ;
     font-weight: 400;
 }
 
-.branch_company{
-    font-size: 18px;
-    color: var(--gray-medium);
-    line-height: 16px ;
+.user_email{
+    color: var(--red);
+    font-size: 14px;
+    font-weight: 600;
 }
-.sub_data{
+
+.user_sub_data{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
 
-.sub_data div{
+.user_sub_data div{
     color: var(--gray-ml);
     font-weight: 600;
 }

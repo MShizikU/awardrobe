@@ -12,7 +12,7 @@ const CompaniesPage = () => {
         <PageThemplate
         label="Компании">
             <ItemList
-                fetchItems={(filter) => store.companies.getCompaniesByFilter(filter.id, filter.status, null ,null, null, null, null)}
+                fetchItems={(filter) => store.companies.getCompaniesByFilter(filter.id, filter.status, filter.name ,filter.inn, null, null, null)}
                 createItem={{
                     fields: [
                         {
@@ -46,7 +46,7 @@ const CompaniesPage = () => {
                             label: 'ID менеджера'
                         }
                     ],
-                    createItem: (status, name, inn, p_address, l_address, manager_id) => store.companies.createCompany( status, name, inn, p_address, l_address, manager_id)
+                    createItem: (status, name, inn, p_address, l_address, manager_id) => store.companies.createCompany( status, name, inn, p_address, l_address, manager_id),
                 }}
 
                 renderItem={({ key, item, wasChanged, setWasChanged }) => (
@@ -56,6 +56,15 @@ const CompaniesPage = () => {
                 ListFilter={({ filter, setFilter }) => (
                     <ListFilter filter={filter} setFilter={setFilter} />
                 )}
+
+                filterFields={
+                    [
+                        { name: 'id', placeholder: 'ID', label: 'ID' },
+                        { name: 'status', placeholder: 'Статус', label: 'статусу' },
+                        { name: 'name', placeholder: 'Название', label: 'названию' },
+                        { name: 'inn', placeholder: 'ИНН', label: 'ИНН' },
+                    ]
+                }
             />
         </PageThemplate>
     );

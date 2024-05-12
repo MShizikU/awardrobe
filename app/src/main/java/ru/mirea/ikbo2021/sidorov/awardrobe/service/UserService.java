@@ -7,10 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.config.security.SuperUserConfig;
-import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.UpdateUserCompanyRequest;
-import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.UpdateUserPasswordRequest;
-import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.UpdateUserRoleRequest;
-import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.UserFilter;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.*;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Company;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.UserRole;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils.Status;
@@ -117,9 +114,23 @@ public class UserService {
                 filter.role_id(),
                 filter.username(),
                 filter.email(),
-                filter.status(),
-                filter.isDisposable()
+                filter.status()
         );
+    }
+
+    public User changeUser(Long userId, UpdateUserRequest request){
+        User currentUser = getCurrentUser();
+        User user = getByIdStrict(userId);
+        UserRole role = roleService.getByIdStrict(request.role_id());
+
+        if (!hasAccessToUser(currentUser, user)) {
+            throw new ForbiddenAccessProblem();
+        }
+
+        user.setRole(role);
+        user.setStatus(request.status());
+        user.setEmail(request.email());
+        return save(user);
     }
 
     /**

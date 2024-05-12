@@ -5,6 +5,9 @@ import PageThemplate from "../../../components/PageThemplate/PageThemplate";
 import Button from "../../../shared/UI/Button/Button";
 import cls from './UserPage.module.css';
 import {observer} from "mobx-react-lite";
+import VisitItem from "../../../components/Items/VisitItem/VisitItem";
+import ListFilter from "../../../components/ListFilter/ListFilter";
+import ItemList from "../../../enities/ItemList/ItemList";
 
 const UserPage = () => {
     const {store} = useContext(Context);
@@ -55,6 +58,30 @@ const UserPage = () => {
                             }
                         }>Выйти</Button>
                 </div>
+                <div className={cls.visits}>
+                    <div className={cls.visits_label}>
+                        Ваши посещения
+                    </div>
+                    <ItemList
+                        fetchItems={(filter) => store.visits.getVisitByFilter(filter.id, store.user.id, filter.cell_id)}
+                        createItem={null}
+                        renderItem={({ key, item, wasChanged, setWasChanged }) => (
+                            <VisitItem key={key} visit={item} wasChanged={wasChanged} setWasChanged={setWasChanged} />
+                        )}
+
+                        ListFilter={({ filter, setFilter }) => (
+                            <ListFilter filter={filter} setFilter={setFilter} />
+                        )}
+
+                        filterFields={
+                            [
+                                { name: 'id', placeholder: 'ID', label: 'ID' },
+                                { name: 'cell_id', placeholder: 'ID ячейки', label: 'ID ячейки' },
+                            ]
+                        }
+                    />
+                </div>
+
             </div>
         </PageThemplate>
     );

@@ -34,6 +34,13 @@ const CellsPage = () => {
                 ListFilter={({ filter, setFilter }) => (
                     <ListFilter filter={filter} setFilter={setFilter} />
                 )}
+
+                filterFields={
+                    [
+                        { name: 'id', placeholder: 'ID', label: 'ID' },
+                        { name: 'status', placeholder: 'Статус', label: 'статусу' }
+                    ]
+                }
             />
         </PageThemplate>
     );

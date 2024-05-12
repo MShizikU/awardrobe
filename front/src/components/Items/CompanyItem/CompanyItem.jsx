@@ -13,7 +13,11 @@ const CompanyItem = ({company, wasChanged, setWasChanged}) => {
     return (
         <div className={cls.company_folder}>
             <div className={cls.company_top_row}>
-                <div className={cls.company_name}>{company.name} #{id.padStart(4, "0")}</div>
+                <div className={cls.company_name}>{company.name}
+                    <div className={cls.company_id}>
+                        #{id.padStart(4, "0")}
+                    </div>
+                </div>
                 <div className={cls.company_actions}>
                     <EditButton action={()=>{setIsEditVisible(true)}} />
                     <DeleteButton action={ () => {

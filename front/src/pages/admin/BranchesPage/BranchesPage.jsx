@@ -14,7 +14,7 @@ const BranchesPage = () => {
             label="Филиалы">
 
             <ItemList
-                fetchItems={(filter) => store.branches.getBranchByFilter(filter.id, filter.status, null, null, null, null)}
+                fetchItems={(filter) => store.branches.getBranchByFilter(filter.id, filter.status, filter.name, null, null, null)}
                 createItem={{
                     fields: [
                         {
@@ -47,6 +47,14 @@ const BranchesPage = () => {
                 ListFilter={({ filter, setFilter }) => (
                     <ListFilter filter={filter} setFilter={setFilter} />
                 )}
+
+                filterFields={
+                    [
+                        { name: 'id', placeholder: 'ID', label: 'ID' },
+                        { name: 'status', placeholder: 'Статус', label: 'статусу' },
+                        { name: 'name', placeholder: 'Название', label: 'названию' }
+                    ]
+                }
                 />
         </PageThemplate>
     );

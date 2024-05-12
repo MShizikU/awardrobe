@@ -6,6 +6,7 @@ import BranchStore from "./modules/BranchStore";
 import AgrStore from "./modules/AgrStore";
 import CellStore from "./modules/CellStore";
 import {useNavigate} from "react-router-dom";
+import VisitStore from "./modules/VisitStore";
 
 export default class AppStore {
 
@@ -14,6 +15,7 @@ export default class AppStore {
     branches = new BranchStore(this);
     agrs = new AgrStore(this);
     cells = new CellStore(this);
+    visits = new VisitStore(this);
 
     userState = null;
     isAuthState = false;
@@ -52,6 +54,7 @@ export default class AppStore {
             branches: false,
             agrs: false,
             cells: false,
+            visits: false,
             isAuthState: observable,
             isAuth: computed,
             isAdmin: action.bound,

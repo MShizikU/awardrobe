@@ -5,7 +5,7 @@ import Modal from "../../shared/UI/Modal/Modal";
 import Form from "../Form/Form";
 import cls from "./ItemList.module.css";
 
-const ItemList = ({ fetchItems, createItem, renderItem, handleAddItem }) => {
+const ItemList = ({ fetchItems, createItem, renderItem, handleAddItem, filterFields}) => {
 
     const [itemsList, setItemsList] = useState([]);
     const [wasChanged, setWasChanged] = useState(false);
@@ -24,32 +24,44 @@ const ItemList = ({ fetchItems, createItem, renderItem, handleAddItem }) => {
     return (
         <div className={cls.list_wrapper}>
             <div className="filter_wrapper">
-                <ListFilter filter={filter} setFilter={setFilter}/> {/* Добавляем компонент фильтра */}
+                <ListFilter
+                    filterFields={filterFields}
+                    filter={filter}
+                    setFilter={setFilter}
+                />
             </div>
             <div className={cls.items_wrapper}>
                 {itemsList.map(item =>
                     renderItem({key: item.id, item, wasChanged, setWasChanged})
                 )}
             </div>
-            <Button
-                action={(e) => setIsAddVisible(true)}
-                className={"main"}
-            >
-                Добавить
-            </Button>
-            <Modal
-                visible={isAddVisible}
-                setVisible={setIsAddVisible}
-            >
-                <Form
-                    label={"Добавление"}
-                    fields={createItem.fields}
-                    basicAction={handleAddItem}
-                    secondaryAction={() => setIsAddVisible(false)}
-                    actionButtonText={"Сохранить"}
-                    secondaryButtonText={"Отменить"}
-                />
-            </Modal>
+            {createItem != null
+            ?
+                <div>
+                    <Button
+                        action={(e) => setIsAddVisible(true)}
+                        className={"main"}
+                    >
+                        Добавить
+                    </Button>
+                    <Modal
+                        visible={isAddVisible}
+                        setVisible={setIsAddVisible}
+                    >
+                        <Form
+                            label={"Добавление"}
+                            fields={createItem.fields}
+                            basicAction={handleAddItem}
+                            secondaryAction={() => setIsAddVisible(false)}
+                            actionButtonText={"Сохранить"}
+                            secondaryButtonText={"Отменить"}
+                        />
+                    </Modal>
+                </div>
+                : <div></div>
+            }
+
+
         </div>
     );
 };

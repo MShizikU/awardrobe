@@ -13,7 +13,11 @@ const BranchItem = ({branch, wasChanged, setWasChanged}) => {
     return (
         <div className={cls.branch_folder}>
             <div className={cls.branch_top_row}>
-                <div className={cls.branch_name}>{branch.name} #{id.padStart(4, "0")}</div>
+                <div className={cls.branch_name}>{branch.name}
+                <div className={cls.branch_id}>
+                    #{id.padStart(4, "0")}
+                </div>
+                </div>
                 <div className={cls.branch_actions}>
                     <EditButton action={() => {
                         setIsEditVisible(true)

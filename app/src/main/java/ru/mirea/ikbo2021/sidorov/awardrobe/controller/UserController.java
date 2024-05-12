@@ -24,7 +24,6 @@ public class UserController {
     /**
      * Получение пользователя по id
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR')")
     @Operation(summary = "Получение пользователя по id")
     @GetMapping("/{userId}")
     public UserResponse getById(@PathVariable Long userId) {
@@ -43,7 +42,6 @@ public class UserController {
     /**
      * Пагинация пользователей по фильтру
      */
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @Operation(summary = "Получение пользователей по фильтру")
     @PostMapping("/filter")
     public List<UserResponse> findUsersByFilter(@RequestBody @Valid UserFilter filter) {
@@ -53,9 +51,17 @@ public class UserController {
     }
 
     /**
+     * Обновление пользователя
+     */
+    @Operation(summary = "Изменение роли пользователя")
+    @PutMapping("/{userId}")
+    public void changeUser(@PathVariable Long userId, @RequestBody @Valid UpdateUserRequest request) {
+        service.changeUser(userId, request);
+    }
+
+    /**
      * Изменение роли пользователя
      */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Изменение роли пользователя")
     @PutMapping("/change-role")
     public void changeRole(@RequestBody @Valid UpdateUserRoleRequest request) {
@@ -65,7 +71,6 @@ public class UserController {
     /**
      * Изменение компании пользователя
      */
-    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Изменение компании пользователя")
     @PutMapping("/change-company")
     public void changeCompany(@RequestBody @Valid UpdateUserCompanyRequest request){

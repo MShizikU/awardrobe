@@ -58,15 +58,13 @@ export default class UserStore {
     }
 
 
-    getUsersByFilter = async (filter) => {
-        try {
-            const json = JSON.stringify(filter);
-            const response = await $api.post('/users/filter', json);
-            return response.data;
-        } catch (e) {
-            console.log(e);
-        }
-    }
+    getUsersByFilter = async (id, status, username, email, role_id ) => await this.rootStore.performRequest($api.post('/users/filter', {
+        id: id,
+        status: status,
+        username: username,
+        email: email,
+        role_id: role_id
+    }));
 
     changeRole = async (id, role) => {
         const requestData = {
@@ -113,6 +111,12 @@ export default class UserStore {
         }
         return false;
     }
+
+    updateUser = async(id, status, email, role_id) => await this.rootStore.performRequest($api.put(`/users/${id}`, {
+        status: status,
+        email: email,
+        role_id: role_id
+    }));
 
     delete = async (values) => {
         try {

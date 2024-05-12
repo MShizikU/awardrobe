@@ -16,9 +16,6 @@ public record UserResponse (
     @Schema(description = "Почта пользователя", example = "example@tinkoff.ru")
     String email,
 
-    @Schema(description = "Уникальный код пользователя", example = "1asdf1142124xfca")
-    String hashcode,
-
     @Schema(description = "Является ли пользователь одноразовым",example = "true")
     Boolean isDisposable,
 
