@@ -23,5 +23,5 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
             "AND (:physicalAddress IS null OR c.physical_address LIKE %:status%) " +
             "AND (:legalAddress IS null OR c.legal_address LIKE %:legalAddress%)" +
             "AND (:manager_id IS null OR c.manager.id = :manager_id)")
-    List<Company> findAllWithFilter(Long id, String status, String inn, String physicalAddress, String legalAddress, Long manager_id);
+    List<Company> findAllWithFilter(Long id, String status, String inn, String name, String physicalAddress, String legalAddress, Long manager_id);
 }

@@ -2,47 +2,20 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../../index";
 import PageThemplate from "../../../components/PageThemplate/PageThemplate";
 import cls from "./AgrsPage.module.css";
-import Button from "../../../shared/UI/Button/Button";
-import Modal from "../../../shared/UI/Modal/Modal";
-import Form from "../../../enities/Form/Form";
-import AgrItem from "../../../components/AgrItem/AgrItem";
+import AgrItem from "../../../components/Items/AgrItem/AgrItem";
+import ItemList from "../../../enities/ItemList/ItemList";
+import ListFilter from "../../../components/ListFilter/ListFilter";
 
 const AgrsPage = () => {
     const {store} = useContext(Context);
-    const [agrsList, setAgrsList] = useState([]);
-    const [wasChanged, setWasChanged] = useState(false);
-    const [isAddVisible, setIsAddVisible] = useState(false);
-
-    const fetchAgrs = async () => {
-        const agrs = await store.agrs.getAllAgrs();
-        setAgrsList(agrs);
-    };
-
-    useEffect(() => {
-        fetchAgrs().then();
-    }, [wasChanged]);
-
     return (
         <PageThemplate
-            label="Ряды">
-            <div className={cls.agrs_wrapper}>
-                {agrsList.map(agr =>
-                    <AgrItem key={agr.id} agr={agr} wasChanged={wasChanged} setWasChanged={setWasChanged} />
-                )}
-            </div>
-            <Button
-                action={(e) => setIsAddVisible(true)}
-                className={"main"}
+            label={"Ряды"}
             >
-                Добавить
-            </Button>
-            <Modal
-                visible={isAddVisible}
-                setVisible={setIsAddVisible}
-            >
-                <Form
-                    label={"Добавление ряда"}
-                    fields={[
+            <ItemList
+                fetchItems={(filter) => store.agrs.getAgrByFilter(filter.id, filter.status, null, null, null, null)}
+                createItem={{
+                    fields: [
                         {
                             type: 'text',
                             placeholder: 'active',
@@ -67,21 +40,19 @@ const AgrsPage = () => {
                             type: 'text',
                             placeholder: '1',
                             label: 'ID филиала'
-                        },
-                    ]}
-                    basicAction={async (status, openTime, closeTime, executor_id, branch_id) => {
-                        store.agrs.createAgr( status, openTime, closeTime, executor_id, branch_id ).then(() => {
-                            setWasChanged(!wasChanged)
-                        });
-                        setIsAddVisible(false);
-                    }}
-                    secondaryAction={(username, password) => {
-                        setIsAddVisible(false)
-                    }}
-                    actionButtonText={"Сохранить"}
-                    secondaryButtonText={"Отменить"}
-                ></Form>
-            </Modal>
+                        }
+                    ],
+                    createItem: (status, name, executor_id, branch_id) => store.agrs.createAgr(status, name, executor_id, branch_id)
+                }}
+
+                renderItem={({ key, item, wasChanged, setWasChanged }) => (
+                    <AgrItem key={key} agr={item} wasChanged={wasChanged} setWasChanged={setWasChanged} />
+                )}
+
+                ListFilter={({ filter, setFilter }) => (
+                    <ListFilter filter={filter} setFilter={setFilter} />
+                )}
+                />
         </PageThemplate>
     );
 };

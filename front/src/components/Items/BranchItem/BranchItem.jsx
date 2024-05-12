@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
-import EditButton from "../../shared/UI/EditButton/EditButton";
-import DeleteButton from "../../shared/UI/DeleteButton/DeleteButton";
-import Modal from "../../shared/UI/Modal/Modal";
-import Form from "../../enities/Form/Form";
+import EditButton from "../../../shared/UI/EditButton/EditButton";
+import DeleteButton from "../../../shared/UI/DeleteButton/DeleteButton";
+import Modal from "../../../shared/UI/Modal/Modal";
+import Form from "../../../enities/Form/Form";
 import cls from "./BranchItem.module.css";
-import {Context} from "../../index";
+import {Context} from "../../../index";
 
 const BranchItem = ({branch, wasChanged, setWasChanged}) => {
     const [isEditVisible, setIsEditVisible] = React.useState(false);

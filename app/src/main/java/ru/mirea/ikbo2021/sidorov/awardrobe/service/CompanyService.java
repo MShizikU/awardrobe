@@ -80,6 +80,7 @@ public class CompanyService {
                 filter.id(),
                 filter.status(),
                 filter.inn(),
+                filter.name(),
                 filter.physical_address(),
                 filter.legal_address(),
                 filter.manager_id()

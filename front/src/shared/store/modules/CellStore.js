@@ -37,7 +37,6 @@ export default class CellStore{
 
     updateCell = async( id, status, agr_id) =>
         await this.rootStore.performRequest($api.put(`/cell/${id}`, {
-            id: id,
             status : status,
             agr_id: agr_id,
         }));

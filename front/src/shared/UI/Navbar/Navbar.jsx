@@ -25,6 +25,8 @@ const Navbar = () => {
                                 <Link to="/admin/branches">Филиалы</Link>
                                 <Link to="/admin/agrs">Ряды</Link>
                                 <Link to="/admin/cells">Ячейки</Link>
+                                <Link to="/admin/visits">Посещения</Link>
+                                <Link to="/admin/users">Пользователи</Link>
                             </div>
                             :
                             store.isExecutor()

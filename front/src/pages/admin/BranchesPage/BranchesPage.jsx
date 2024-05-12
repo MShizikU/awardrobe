@@ -1,49 +1,22 @@
 import React, {useContext, useEffect, useState} from 'react';
 import PageThemplate from "../../../components/PageThemplate/PageThemplate";
 import {Context} from "../../../index";
-import Button from "../../../shared/UI/Button/Button";
-import Modal from "../../../shared/UI/Modal/Modal";
-import Form from "../../../enities/Form/Form";
-import cls from "./BranchesPage.module.css";
-import BranchItem from "../../../components/BranchItem/BranchItem";
+import BranchItem from "../../../components/Items/BranchItem/BranchItem";
+import ItemList from "../../../enities/ItemList/ItemList";
+import ListFilter from "../../../components/ListFilter/ListFilter";
 
 const BranchesPage = () => {
 
     const {store} = useContext(Context);
-    const [branchesList, setBranchesList] = useState([]);
-    const [wasChanged, setWasChanged] = useState(false);
-    const [isAddVisible, setIsAddVisible] = useState(false);
-
-    const fetchBranches = async () => {
-        const branches = await store.branches.getAllBranches();
-        setBranchesList(branches);
-    };
-
-    useEffect(() => {
-        fetchBranches().then();
-    }, [wasChanged]);
 
     return (
         <PageThemplate
             label="Филиалы">
-            <div className={cls.branches_wrapper}>
-                {branchesList.map(branch =>
-                    <BranchItem key={branch.id} branch={branch} wasChanged={wasChanged} setWasChanged={setWasChanged} />
-                )}
-            </div>
-            <Button
-                action={(e) => setIsAddVisible(true)}
-                className={"main"}
-            >
-                Добавить
-            </Button>
-            <Modal
-                visible={isAddVisible}
-                setVisible={setIsAddVisible}
-            >
-                <Form
-                    label={"Добавление филиала"}
-                    fields={[
+
+            <ItemList
+                fetchItems={(filter) => store.branches.getBranchByFilter(filter.id, filter.status, null, null, null, null)}
+                createItem={{
+                    fields: [
                         {
                             type: 'text',
                             placeholder: 'ACTIVE',
@@ -63,21 +36,18 @@ const BranchesPage = () => {
                             type: 'text',
                             placeholder: '1',
                             label: 'ID компании'
-                        },
-                    ]}
-                    basicAction={async (status, name, manager_id, company_id) => {
-                        store.branches.createBranch( status, name, manager_id, company_id ).then(() => {
-                            setWasChanged(!wasChanged)
-                        });
-                        setIsAddVisible(false);
-                    }}
-                    secondaryAction={(username, password) => {
-                        setIsAddVisible(false)
-                    }}
-                    actionButtonText={"Сохранить"}
-                    secondaryButtonText={"Отменить"}
-                ></Form>
-            </Modal>
+                        }
+                    ],
+                    createItem: (status, name, manager_id, company_id) => store.branches.createBranch( status, name, manager_id, company_id )
+                }}
+                renderItem={({ key, item, wasChanged, setWasChanged }) => (
+                    <BranchItem key={key} branch={item} wasChanged={wasChanged} setWasChanged={setWasChanged} />
+                )}
+
+                ListFilter={({ filter, setFilter }) => (
+                    <ListFilter filter={filter} setFilter={setFilter} />
+                )}
+                />
         </PageThemplate>
     );
 };

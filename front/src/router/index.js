@@ -7,14 +7,18 @@ import PerformAutomativeWardrobe from "../pages/awardobe/PerformAutomativeWardro
 import CompaniesPage from "../pages/admin/CompaniesPage/CompaniesPage";
 import BranchesPage from "../pages/admin/BranchesPage/BranchesPage";
 import AgrsPage from "../pages/admin/AgrsPage/AgrsPage";
-import CellsPage from "../pages/admin/CellsPage";
+import CellsPage from "../pages/admin/CellsPage/CellsPage";
 import UserPage from "../pages/utlis/UserPage/UserPage";
+import UsersPage from "../pages/admin/UsersPage/UsersPage";
+import VisitPage from "../pages/admin/VisitPage/VisitPage";
 
 export const adminRoutes = [
     { path: "/admin/companies", element: <CompaniesPage />, exact: true },
     { path: "/admin/branches", element: <BranchesPage />, exact: true },
     { path: "/admin/agrs", element: <AgrsPage />, exact: true },
     { path: "/admin/cells", element: <CellsPage />, exact: true },
+    { path: "/admin/visits", element: <VisitPage />, exact: true },
+    { path: "/admin/users", element: <UsersPage />, exact: true },
     { path: '/user', element: <UserPage />, exact: true  },
 ]
 

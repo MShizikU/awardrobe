@@ -1,50 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import PageThemplate from "../../../components/PageThemplate/PageThemplate";
 import {Context} from "../../../index";
-import CompanyItem from "../../../components/CompanyItem/CompanyItem";
-import cls from "./CompaniesPage.module.css"
+import CompanyItem from "../../../components/Items/CompanyItem/CompanyItem";
 import {observer} from "mobx-react-lite";
-import Button from "../../../shared/UI/Button/Button";
-import Form from "../../../enities/Form/Form";
-import Modal from "../../../shared/UI/Modal/Modal";
+import ItemList from "../../../enities/ItemList/ItemList";
+import ListFilter from "../../../components/ListFilter/ListFilter";
 
 const CompaniesPage = () => {
     const {store} = useContext(Context);
-    const [companiesList, setCompaniesList] = useState([]);
-    const [wasChanged, setWasChanged] = useState(false);
-    const [isAddVisible, setIsAddVisible] = useState(false);
-
-    const fetchCompanies = async () => {
-        const companies = await store.companies.getAllCompanies();
-        console.log(companies)
-        setCompaniesList(companies);
-    };
-
-    useEffect(() => {
-        console.log("triggered");
-        fetchCompanies().then();
-    }, [wasChanged]);
     return (
         <PageThemplate
         label="Компании">
-            <div className={cls.companies_wrapper}>
-                {companiesList.map(comp =>
-                    <CompanyItem key={comp.id} company={comp} wasChanged={wasChanged} setWasChanged={setWasChanged} />
-                )}
-            </div>
-            <Button
-                action={(e) => setIsAddVisible(true)}
-                className={"main"}
-            >
-                Добавить
-            </Button>
-            <Modal
-                visible={isAddVisible}
-                setVisible={setIsAddVisible}
-            >
-                <Form
-                    label={"Добавление компании"}
-                    fields={[
+            <ItemList
+                fetchItems={(filter) => store.companies.getCompaniesByFilter(filter.id, filter.status, null ,null, null, null, null)}
+                createItem={{
+                    fields: [
                         {
                             type: 'text',
                             placeholder: 'ACTIVE',
@@ -74,22 +44,19 @@ const CompaniesPage = () => {
                             type: 'text',
                             placeholder: '1',
                             label: 'ID менеджера'
-                        },
-                    ]}
-                    basicAction={async (status, name, inn, p_address, l_address, manager_id) => {
-                        store.companies.createCompany( status, name, inn, p_address, l_address, manager_id).then(() => {
-                            setWasChanged(!wasChanged)
-                        });
-                        setIsAddVisible(false);
-                    }}
-                    secondaryAction={(username, password) => {
-                        setIsAddVisible(false)
-                    }}
-                    actionButtonText={"Сохранить"}
-                    secondaryButtonText={"Отменить"}
-                ></Form>
-            </Modal>
+                        }
+                    ],
+                    createItem: (status, name, inn, p_address, l_address, manager_id) => store.companies.createCompany( status, name, inn, p_address, l_address, manager_id)
+                }}
 
+                renderItem={({ key, item, wasChanged, setWasChanged }) => (
+                    <CompanyItem key={key} company={item} wasChanged={wasChanged} setWasChanged={setWasChanged} />
+                )}
+
+                ListFilter={({ filter, setFilter }) => (
+                    <ListFilter filter={filter} setFilter={setFilter} />
+                )}
+            />
         </PageThemplate>
     );
 };

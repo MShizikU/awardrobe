@@ -138,7 +138,7 @@ public class CellService {
     public Cell update(Long cellId, Cell request){
         Cell cell = getByIdStrict(cellId);
 
-        var agr = agrService.getByIdStrict(request.getId());
+        var agr = agrService.getByIdStrict(request.getAgr().getId());
 
         cell.setStatus(request.getStatus());
         cell.setAgr(agr);

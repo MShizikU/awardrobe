@@ -147,7 +147,6 @@ export default class AppStore {
         try {
             this.isLoading = true;
             const response = await request;
-            console.log(response);
             return response.data;
         }
         catch (e) {

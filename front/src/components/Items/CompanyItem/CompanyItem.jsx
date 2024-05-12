@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import cls from "./CompanyItem.module.css";
-import EditButton from "../../shared/UI/EditButton/EditButton";
-import DeleteButton from "../../shared/UI/DeleteButton/DeleteButton";
-import Modal from "../../shared/UI/Modal/Modal";
-import Form from "../../enities/Form/Form";
-import {Context} from "../../index";
+import EditButton from "../../../shared/UI/EditButton/EditButton";
+import DeleteButton from "../../../shared/UI/DeleteButton/DeleteButton";
+import Modal from "../../../shared/UI/Modal/Modal";
+import Form from "../../../enities/Form/Form";
+import {Context} from "../../../index";
 
 const CompanyItem = ({company, wasChanged, setWasChanged}) => {
     const [isEditVisible, setIsEditVisible] = React.useState(false);
