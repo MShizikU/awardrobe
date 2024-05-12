@@ -13,7 +13,7 @@ const AgrsPage = () => {
             label={"Ряды"}
             >
             <ItemList
-                fetchItems={(filter) => store.agrs.getAgrByFilter(filter.id, filter.status, null, null, null, null)}
+                fetchItems={(filter) => store.agrs.getAgrByFilter(filter.id, filter.status, null, null, null, filter.branch_id)}
                 createItem={{
                     fields: [
                         {
@@ -56,7 +56,8 @@ const AgrsPage = () => {
                 filterFields={
                     [
                         { name: 'id', placeholder: 'ID', label: 'ID' },
-                        { name: 'status', placeholder: 'Статус', label: 'статусу' }
+                        { name: 'status', placeholder: 'Статус', label: 'статусу' },
+                        { name: 'branch_id', placeholder: 'ID филиала', label: 'филиалу' },
                     ]
                 }
                 />

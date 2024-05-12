@@ -96,6 +96,11 @@ public class CellService {
         return cells;
     }
 
+    public Cell getUserCurCell(Long userId){
+        var cell = repository.findWithFilter(null, Status.INUSE.getStatus(),null, userId, null);
+        return cell.getFirst();
+    }
+
     /**
      * Получение списка ячеек по ID нардеробного ряда
      *

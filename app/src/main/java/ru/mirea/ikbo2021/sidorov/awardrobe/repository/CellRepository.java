@@ -16,7 +16,7 @@ public interface CellRepository  extends JpaRepository<Cell, Long> {
 
     @Query("SELECT c FROM Cell c WHERE " +
             "(:id is NULL OR c.id = :id) " +
-            "AND (:status IS null OR c.status LIKE %:status%) " +
+            "AND (:status IS null OR :status = '' OR c.status = :status) " +
             "AND (:sequenceNumber is NULL OR c.sequence_number = :sequenceNumber) " +
             "AND (:user_id IS null OR c.user.id = :user_id) " +
             "AND (:agr_id IS null OR c.agr.id = :agr_id)"

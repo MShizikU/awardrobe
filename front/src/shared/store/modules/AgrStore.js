@@ -40,6 +40,8 @@ export default class AgrStore{
         branch_id: branch_id
     }));
 
+    getOptimal = async (branch_id) => await this.rootStore.performRequest($api.get('/agrs/optimal?branchId=' + branch_id));
+
     getAllAgrs = async () => await this.rootStore.performRequest($api.get('/agrs'));
 
     updateAgr = async (id, status, open_time, close_time, executor_id, branch_id) => await this.rootStore.performRequest($api.put('/agr/' + id, {

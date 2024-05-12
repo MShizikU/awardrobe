@@ -39,6 +39,7 @@ CREATE TABLE agrs(
     open_time TEXT NOT NULL,
     close_time TEXT NOT NULL,
     executor_id INTEGER REFERENCES users(id),
+    executor_ws_id TEXT,
     branch_id INTEGER REFERENCES branches(id) NOT NULL
 );
 
@@ -56,6 +57,12 @@ CREATE TABLE visit(
     end_time TIMESTAMP ,
     cell_id INTEGER REFERENCES cell(id) NOT NULL,
     user_id INTEGER REFERENCES users(id) NOT NULL
+);
+
+CREATE TABLE executon_window(
+    id SERIAL PRIMARY KEY,
+    agr_id INTEGER REFERENCES agrs(id) NOT NULL,
+    
 );
 
 /*

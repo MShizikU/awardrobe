@@ -14,7 +14,7 @@ public interface AgrRepository extends JpaRepository<Agr, Long> {
 
     @Query("SELECT a FROM Agr a WHERE " +
             "(:id IS null OR a.id = :id) " +
-            "AND (:status IS null OR a.status LIKE %:status%) " +
+            "AND (:status IS null OR :status = '' OR a.status = :status) " +
             "AND (:openTime IS null OR a.open_time LIKE %:openTime%)" +
             "AND (:closeTime IS null OR a.close_time LIKE %:closeTime%)" +
             "AND (:executor_id IS null OR a.executor.id = :executor_id) " +

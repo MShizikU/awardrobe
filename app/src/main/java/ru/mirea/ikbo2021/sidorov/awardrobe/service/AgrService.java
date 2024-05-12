@@ -8,8 +8,11 @@ import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Agr;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils.Status;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityNotFound;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.AgrRepository;
+import ru.mirea.ikbo2021.sidorov.awardrobe.repository.CellRepository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +20,7 @@ public class AgrService {
     private final AgrRepository repository;
     private final UserService userService;
     private final BranchService branchService;
+    private final CellRepository cellRepository;
 
     /**
      * Сохранение гардеробного ряда
@@ -82,6 +86,24 @@ public class AgrService {
                 filter.branch_id()
         );
     }
+
+    /**
+     * Получение оптимального ряда
+     * @param branchId ID филилала
+     * @return ряд
+     */
+    public Agr getOptimal(Long branchId){
+        var branch = branchService.getById(branchId);
+        List<Agr> agrs = getAgrsByBranchId(branchId);
+        Optional<Agr> max = agrs.stream().max(Comparator.comparing(v -> cellRepository.findWithFilter(null, "active",null, null, v.getId()).size()));
+
+        return max.orElse(null);
+    }
+
+    public void setAgrExecutor(Long agrId, Long executorId, String wsId){
+
+    }
+
 
     /**
      * Получение списка гардеробных рядов

@@ -1,0 +1,20 @@
+.chose_item{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--gray-ll);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    flex: 1 0 15% !important;
+    font-size: 20px;
+    color: var(--brown);
+    line-height: 24px ;
+    font-weight: 600;
+}
+
+.chose_item:hover{
+    border: 2px dashed var(--red);
+    box-shadow: 0 6px 30px 0 rgba(161, 74, 150, 0.2);
+}

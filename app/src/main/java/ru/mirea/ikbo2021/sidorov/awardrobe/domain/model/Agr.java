@@ -46,6 +46,12 @@ public class Agr {
     private User executor;
 
     /**
+     * ID чата websocket
+     */
+    @Column(name="executor_ws_id")
+    private String executorWsId;
+
+    /**
      * Головной филиал
      */
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})

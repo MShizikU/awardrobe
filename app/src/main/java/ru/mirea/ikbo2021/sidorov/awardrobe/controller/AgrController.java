@@ -48,6 +48,13 @@ public class AgrController {
         return mapper.toListCompactResponse(agrs);
     }
 
+    @Operation(summary = "Получение оптимального ряда")
+    @GetMapping("/agrs/optimal")
+    public AgrCompactResponse getOptimalAgr(@RequestParam Long branchId){
+        var agr = service.getOptimal(branchId);
+        return mapper.toCompactResponse(agr);
+    }
+
     @Operation(summary = "Обновление данных гардеробного ряда")
     @PutMapping("/agr/{agrId}")
     public AgrCompactResponse updateAgr(@PathVariable Long agrId, @RequestBody @Valid AgrUpdateRequest request){

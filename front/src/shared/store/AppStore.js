@@ -116,8 +116,8 @@ export default class AppStore {
                         }, 10);
                     } else {
                         notification.error({
-                            message: e.response.data?.title,
-                            description: e.response.data?.detail,
+                            message: "Похоже вы где-то ошиблись",
+                            description: "Проверьте вводимые данные и повторите попытку",
                         }, 10);
                     }
 

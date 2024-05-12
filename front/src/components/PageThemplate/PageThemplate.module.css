@@ -6,8 +6,7 @@
     width: 100%;
     background-color: var(--gray-light);
     padding-bottom: 40px;
-    height: 100%;
-    overflow: auto;
+    height: 90vh;
 }
 
 .page_content{
@@ -22,6 +21,8 @@
     padding: 40px;
     flex: 1 0 0;
     gap: 15px;
+    overflow: auto;
+
 }
 
 .page_label{
