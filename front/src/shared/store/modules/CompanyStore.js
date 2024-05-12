@@ -27,7 +27,7 @@ export default class CompanyStore{
         physical_address: p_address,
         legal_address: l_address,
         manager_id: manager_id,
-    }));
+    }), true);
 
     getFullCompany = async (id) => await this.rootStore.performRequest($api.get('/company/' + id));
 
@@ -50,8 +50,8 @@ export default class CompanyStore{
         physical_address: p_address,
         legal_address: l_address,
         manager_id: manager_id
-    }));
+    }), true);
 
-    deleteCompany = async (id) => await this.rootStore.performRequest($api.delete("/company/" + id));
+    deleteCompany = async (id) => await this.rootStore.performRequest($api.delete("/company/" + id), true);
 
 }

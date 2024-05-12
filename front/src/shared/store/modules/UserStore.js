@@ -116,18 +116,7 @@ export default class UserStore {
         status: status,
         email: email,
         role_id: role_id
-    }));
+    }), true);
 
-    delete = async (values) => {
-        try {
-            const json = JSON.stringify(values);
-            console.log(json)
-            await $api.post(`/users/delete`, json);
-            message.success('Аккаунт успешно удален');
-            return true;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        }
-        return false;
-    }
+    delete = async (id) => await this.rootStore.performRequest($api.delete(`/users/${id}`), true);
 }

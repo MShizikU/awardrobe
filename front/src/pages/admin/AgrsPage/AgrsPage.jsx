@@ -34,15 +34,15 @@ const AgrsPage = () => {
                         {
                             type: 'text',
                             placeholder: '1',
-                            label: 'ID исполнителя'
+                            label: 'ID филиала'
                         },
                         {
                             type: 'text',
                             placeholder: '1',
-                            label: 'ID филиала'
+                            label: 'ID исполнителя'
                         }
                     ],
-                    createItem: (status, name, executor_id, branch_id) => store.agrs.createAgr(status, name, executor_id, branch_id)
+                    createItem: (status, open_time, close_time,branch_id, executor_id ) => store.agrs.createAgr(status, open_time, close_time, executor_id, branch_id)
                 }}
 
                 renderItem={({ key, item, wasChanged, setWasChanged }) => (

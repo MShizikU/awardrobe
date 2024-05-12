@@ -15,11 +15,12 @@ import Input from '../../shared/UI/Input/Input'
         setInputsValues(initialState)
     }, [fields])
 
-    const handleFormAction = (e) => {
+    const handleFormAction = async (e) => {
         e.preventDefault()
         const values = Object.values(inputsValues)
         basicAction(...values)
         setInputsValues(initialState)
+
     }
 
     const handleFormSecondaryAction = (e) => {

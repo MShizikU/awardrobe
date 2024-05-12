@@ -22,6 +22,7 @@ export default class AppStore {
     isSuperAdminState = null;
 
     isLoading = false;
+    hasUpdate = false;
 
     get isAuth() {
         return this.isAuthState;
@@ -55,6 +56,8 @@ export default class AppStore {
             agrs: false,
             cells: false,
             visits: false,
+            hasUpdate: observable,
+            isLoading: observable,
             isAuthState: observable,
             isAuth: computed,
             isAdmin: action.bound,
@@ -146,7 +149,7 @@ export default class AppStore {
         return this.user?.role.name === 'EXECUTOR' || this.isAdmin();
     }
 
-    performRequest = async (request) => {
+    performRequest = async (request, isUpdate = false) => {
         try {
             this.isLoading = true;
             const response = await request;
@@ -156,6 +159,9 @@ export default class AppStore {
             this.httpError(e);
         }
         finally {
+            if (isUpdate){
+                this.hasUpdate = !this.hasUpdate;
+            }
             this.isLoading = false;
         }
         return [];

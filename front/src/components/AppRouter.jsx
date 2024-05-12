@@ -6,6 +6,8 @@ import Login from "../pages/utlis/Login";
 import CompaniesPage from "../pages/admin/CompaniesPage/CompaniesPage";
 import UserPage from "../pages/utlis/UserPage/UserPage";
 import {observer} from "mobx-react-lite";
+import ChooseCompanyPage from "../pages/awardobe/ChooseCompanyPage/ChooseCompanyPage";
+import UsersPage from "../pages/admin/UsersPage/UsersPage";
 
 const AppRouter = () => {
     const {store} = useContext(Context);
@@ -37,7 +39,7 @@ const AppRouter = () => {
                                 key={route.path}
                             />
                         )}
-                        <Route path="*" element={<UserPage/>}  />
+                        <Route path="*" element={<UsersPage/>}  />
                     </Routes>
                 :
                     <Routes>
@@ -49,7 +51,7 @@ const AppRouter = () => {
                                 key={route.path}
                             />
                         )}
-                        <Route path="*" element={<UserPage/>}  />
+                        <Route path="*" element={<ChooseCompanyPage/>}  />
                     </Routes>
             :
             <Routes>

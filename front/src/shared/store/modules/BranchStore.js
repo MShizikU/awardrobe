@@ -26,7 +26,7 @@ export default class BranchStore{
         name: name,
         company_id: company_id,
         manager_id: manager_id,
-    }));
+    }), true);
 
     getFullBranch = async (id) => await this.rootStore.performRequest($api.get('/branch/' + id));
 
@@ -45,9 +45,9 @@ export default class BranchStore{
         name: name,
         company_id: company_id,
         manager_id: manager_id
-    }));
+    }), true);
 
-    deleteBranch = async (id) => await this.rootStore.performRequest($api.delete("/branch/" + id));
+    deleteBranch = async (id) => await this.rootStore.performRequest($api.delete("/branch/" + id), true);
 
 
 }

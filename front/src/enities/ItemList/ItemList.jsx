@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ListFilter from "../../components/ListFilter/ListFilter";
 import Button from "../../shared/UI/Button/Button";
 import Modal from "../../shared/UI/Modal/Modal";
 import Form from "../Form/Form";
 import cls from "./ItemList.module.css";
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
-const ItemList = ({ fetchItems, createItem, renderItem, handleAddItem, filterFields}) => {
-
+const ItemList = ({ fetchItems, createItem, renderItem, filterFields}) => {
+    const {store} = useContext(Context);
     const [itemsList, setItemsList] = useState([]);
     const [wasChanged, setWasChanged] = useState(false);
     const [isAddVisible, setIsAddVisible] = useState(false);
@@ -18,8 +20,13 @@ const ItemList = ({ fetchItems, createItem, renderItem, handleAddItem, filterFie
     };
 
     useEffect(() => {
+        console.log("finaly");
+    },[])
+
+    useEffect(() => {
         fetchData();
-    }, [wasChanged, filter]);
+        setIsAddVisible(false);
+    }, [store.hasUpdate, wasChanged, filter]);
 
     return (
         <div className={cls.list_wrapper}>
@@ -51,7 +58,10 @@ const ItemList = ({ fetchItems, createItem, renderItem, handleAddItem, filterFie
                         <Form
                             label={"Добавление"}
                             fields={createItem.fields}
-                            basicAction={handleAddItem}
+                            basicAction={(...values) => {
+                                createItem.createItem(...values);
+                            }
+                            }
                             secondaryAction={() => setIsAddVisible(false)}
                             actionButtonText={"Сохранить"}
                             secondaryButtonText={"Отменить"}
@@ -66,4 +76,4 @@ const ItemList = ({ fetchItems, createItem, renderItem, handleAddItem, filterFie
     );
 };
 
-export default ItemList;
+export default observer(ItemList);

@@ -1,6 +1,6 @@
 import Login from "../pages/utlis/Login";
 import Registration from "../pages/utlis/Registration";
-import ChooseCompanyPage from "../pages/awardobe/ChooseCompanyPage";
+import ChooseCompanyPage from "../pages/awardobe/ChooseCompanyPage/ChooseCompanyPage";
 import ChooseBranchPage from "../pages/awardobe/ChooseBranchPage";
 import ChooseAgrPage from "../pages/awardobe/ChooseAgrPage";
 import PerformAutomativeWardrobe from "../pages/awardobe/PerformAutomativeWardrobe";

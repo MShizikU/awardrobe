@@ -25,9 +25,9 @@ export default class AgrStore{
         status: status,
         open_time: open_time,
         close_time: close_time,
-        executor_id: executor_id,
-        branch_id: branch_id
-    }));
+        branch_id: branch_id,
+        executor_id: executor_id
+    }), true);
 
     getFullAgr = async (id) => await this.rootStore.performRequest($api.get('/agr/' + id));
 
@@ -48,9 +48,9 @@ export default class AgrStore{
         close_time: close_time,
         executor_id: executor_id,
         branch_id: branch_id
-    }));
+    }), true);
 
-    deleteAgr = async (id) => await this.rootStore.performRequest($api.delete("/agr/" + id));
+    deleteAgr = async (id) => await this.rootStore.performRequest($api.delete("/agr/" + id), true);
 
 
 }

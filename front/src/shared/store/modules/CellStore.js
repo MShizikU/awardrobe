@@ -15,12 +15,12 @@ export default class CellStore{
     createCell = async (status, agr_id) => await this.rootStore.performRequest($api.post('/cell', {
         status: status,
         agr_id: agr_id
-    }));
+    }), true);
 
-    createCellsMultiple = async (agr_id, amount) => await this.rootStore.performRequest($api.post('/cell', {
+    createCellsMultiple = async (agr_id, amount) => await this.rootStore.performRequest($api.post('/cells', {
         agr_id: agr_id,
         amount: amount
-    }));
+    }), true);
 
     getFullCell = async (id) => await this.rootStore.performRequest($api.get(`/cells/${id}`));
 
@@ -39,15 +39,15 @@ export default class CellStore{
         await this.rootStore.performRequest($api.put(`/cell/${id}`, {
             status : status,
             agr_id: agr_id,
-        }));
+        }), true);
 
     setUserInCell = async(user_id,agr_id ) =>
-        await this.rootStore.performRequest($api.put(`/cells/set?userId=${user_id}&agrId=${agr_id}`));
+        await this.rootStore.performRequest($api.put(`/cells/set?userId=${user_id}&agrId=${agr_id}`), true);
 
     removeUserInCell = async(user_id ) =>
         await this.rootStore.performRequest($api.put(`/cells/remove?userId=${user_id}`));
 
-    deleteCell = async(id) => await this.rootStore.performRequest($api.delete(`/cell/${id}`));
+    deleteCell = async(id) => await this.rootStore.performRequest($api.delete(`/cell/${id}`), true);
 
     getCurrentCell = async (id) => {
         await $api.post(`/cell/user`);

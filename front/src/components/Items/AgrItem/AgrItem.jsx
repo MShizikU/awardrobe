@@ -43,7 +43,7 @@ const AgrItem = ({agr, wasChanged, setWasChanged}) => {
                 setVisible={setIsEditVisible}
             >
                 <Form
-                    label={"Добавление ряда"}
+                    label={"Изменение ряда"}
                     fields={[
                         {
                             type: 'text',
