@@ -1,0 +1,52 @@
+.branch_folder{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    background: var(--gray-ll);
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+.branch_folder:hover{
+    border: 1px solid var(--red);
+    box-shadow: 0 6px 30px 0 rgba(161, 74, 150, 0.2);
+}
+
+.branch_top_row{
+    display: flex;
+    flex-direction: row;
+}
+
+.branch_actions{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.branch_name{
+    flex: 1 0 auto;
+    font-size: 24px;
+    color: var(--brown);
+    line-height: 24px ;
+    font-weight: 600;
+}
+
+.branch_company{
+    font-size: 18px;
+    color: var(--gray-medium);
+    line-height: 16px ;
+}
+.sub_data{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sub_data div{
+    color: var(--gray-ml);
+    font-weight: 600;
+}

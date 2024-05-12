@@ -1,35 +1,33 @@
 import React, {useContext, useEffect, useState} from 'react';
-import PageThemplate from "../../../components/PageThemplate/PageThemplate";
 import {Context} from "../../../index";
-import CompanyItem from "../../../components/CompanyItem/CompanyItem";
-import cls from "./CompaniesPage.module.css"
-import {observer} from "mobx-react-lite";
+import PageThemplate from "../../../components/PageThemplate/PageThemplate";
+import cls from "./AgrsPage.module.css";
 import Button from "../../../shared/UI/Button/Button";
-import Form from "../../../enities/Form/Form";
 import Modal from "../../../shared/UI/Modal/Modal";
+import Form from "../../../enities/Form/Form";
+import AgrItem from "../../../components/AgrItem/AgrItem";
 
-const CompaniesPage = () => {
+const AgrsPage = () => {
     const {store} = useContext(Context);
-    const [companiesList, setCompaniesList] = useState([]);
+    const [agrsList, setAgrsList] = useState([]);
     const [wasChanged, setWasChanged] = useState(false);
     const [isAddVisible, setIsAddVisible] = useState(false);
 
-    const fetchCompanies = async () => {
-        const companies = await store.companies.getAllCompanies();
-        console.log(companies)
-        setCompaniesList(companies);
+    const fetchAgrs = async () => {
+        const agrs = await store.agrs.getAllAgrs();
+        setAgrsList(agrs);
     };
 
     useEffect(() => {
-        console.log("triggered");
-        fetchCompanies().then();
+        fetchAgrs().then();
     }, [wasChanged]);
+
     return (
         <PageThemplate
-        label="Компании">
-            <div className={cls.companies_wrapper}>
-                {companiesList.map(comp =>
-                    <CompanyItem key={comp.id} company={comp} wasChanged={wasChanged} setWasChanged={setWasChanged} />
+            label="Ряды">
+            <div className={cls.agrs_wrapper}>
+                {agrsList.map(agr =>
+                    <AgrItem key={agr.id} agr={agr} wasChanged={wasChanged} setWasChanged={setWasChanged} />
                 )}
             </div>
             <Button
@@ -43,41 +41,36 @@ const CompaniesPage = () => {
                 setVisible={setIsAddVisible}
             >
                 <Form
-                    label={"Добавление компании"}
+                    label={"Добавление ряда"}
                     fields={[
                         {
                             type: 'text',
-                            placeholder: 'ACTIVE',
+                            placeholder: 'active',
                             label: 'Статус'
                         },
                         {
                             type: 'text',
-                            placeholder: 'ООО Рога и Копыта',
-                            label: 'Название'
+                            placeholder: '09:00',
+                            label: 'Время открытия'
                         },
                         {
                             type: 'text',
-                            placeholder: '12345',
-                            label: 'ИНН'
-                        },
-                        {
-                            type: 'text',
-                            placeholder: 'г. Кемерово, д.3',
-                            label: 'Физический адрес'
-                        },
-                        {
-                            type: 'text',
-                            placeholder: 'г. Кемерово, д.3',
-                            label: 'Юридический адрес'
+                            placeholder: '18:00',
+                            label: 'Время закрытия'
                         },
                         {
                             type: 'text',
                             placeholder: '1',
-                            label: 'ID менеджера'
+                            label: 'ID исполнителя'
+                        },
+                        {
+                            type: 'text',
+                            placeholder: '1',
+                            label: 'ID филиала'
                         },
                     ]}
-                    basicAction={async (status, name, inn, p_address, l_address, manager_id) => {
-                        store.companies.createCompany( status, name, inn, p_address, l_address, manager_id).then(() => {
+                    basicAction={async (status, openTime, closeTime, executor_id, branch_id) => {
+                        store.agrs.createAgr( status, openTime, closeTime, executor_id, branch_id ).then(() => {
                             setWasChanged(!wasChanged)
                         });
                         setIsAddVisible(false);
@@ -89,9 +82,8 @@ const CompaniesPage = () => {
                     secondaryButtonText={"Отменить"}
                 ></Form>
             </Modal>
-
         </PageThemplate>
     );
 };
 
-export default observer(CompaniesPage);
+export default AgrsPage;

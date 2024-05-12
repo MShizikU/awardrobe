@@ -1,16 +1,14 @@
 import React from 'react';
-import cls from './Input.module.css'
+import cls from './FilterInput.module.css'
 
-const Input = ({
-       type,
-       placeholder,
-       inputValue,
-       setInputValue,
-       disabled,
-       range,
-       label,
-       onChange
-   }) => {
+const FilterInput = ({
+                   type,
+                   placeholder,
+                   disabled,
+                   label,
+                    value,
+                   onChange
+               }) => {
     return (
         <div className={cls.inputwrapper}>
             <div className={cls.label}>{label}</div>
@@ -18,8 +16,8 @@ const Input = ({
                 className={cls.input}
                 type={type}
                 placeholder={placeholder}
-                onChange={(e) => setInputValue(e.target.value)}
-                value={inputValue}
+                onChange={onChange}
+                value={value}
                 disabled={disabled}
                 autoComplete='on'
             />
@@ -27,4 +25,4 @@ const Input = ({
     );
 };
 
-export default Input;
+export default FilterInput;

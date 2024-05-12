@@ -21,93 +21,33 @@ export default class BranchStore{
         this.isLoading = state;
     }
 
-    createBranch = async (status, name, manager_id, company_id) => {
-        try {
-            this.isLoadingState = true;
-            const response = await $api.post('/branch', {
-                status: status,
-                name: name,
-                company_id: company_id,
-                manager_id: manager_id,
-            });
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    createBranch = async (status, name, manager_id, company_id) => await this.rootStore.performRequest($api.post('/branch', {
+        status: status,
+        name: name,
+        company_id: company_id,
+        manager_id: manager_id,
+    }));
 
-    getFullBranch = async (id) => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.get('/branch/' + id);
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    getFullBranch = async (id) => await this.rootStore.performRequest($api.get('/branch/' + id));
 
-    getBranchByFilter = async (id, status, name, manager_id, company_id) => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.post('/branches/filter', {
-                id: id,
-                status: status,
-                name: name,
-                company_id: company_id,
-                manager_id: manager_id
-            });
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    getBranchByFilter = async (id, status, name, manager_id, company_id) => await this.rootStore.performRequest($api.post('/branches/filter', {
+        id: id,
+        status: status,
+        name: name,
+        company_id: company_id,
+        manager_id: manager_id
+    }));
 
-    getAllBranches = async () => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.get('/branches');
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    getAllBranches = async () => await this.rootStore.performRequest($api.get('/branches'));
 
-    updateBranch = async (id, status, name, company_id, manager_id) => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.put('/branch/' + id, {
-                status: status,
-                name: name,
-                company_id: company_id,
-                manager_id: manager_id
-            })
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    updateBranch = async (id, status, name, company_id, manager_id) => await this.rootStore.performRequest($api.put('/branch/' + id, {
+        status: status,
+        name: name,
+        company_id: company_id,
+        manager_id: manager_id
+    }));
 
-    deleteBranch = async (id) => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.delete("/branch/" + id)
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    deleteBranch = async (id) => await this.rootStore.performRequest($api.delete("/branch/" + id));
 
 
 }

@@ -5,8 +5,8 @@ import ChooseBranchPage from "../pages/awardobe/ChooseBranchPage";
 import ChooseAgrPage from "../pages/awardobe/ChooseAgrPage";
 import PerformAutomativeWardrobe from "../pages/awardobe/PerformAutomativeWardrobe";
 import CompaniesPage from "../pages/admin/CompaniesPage/CompaniesPage";
-import BranchesPage from "../pages/admin/BranchesPage";
-import AgrsPage from "../pages/admin/AgrsPage";
+import BranchesPage from "../pages/admin/BranchesPage/BranchesPage";
+import AgrsPage from "../pages/admin/AgrsPage/AgrsPage";
 import CellsPage from "../pages/admin/CellsPage";
 import UserPage from "../pages/utlis/UserPage/UserPage";
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BranchesPage = () => {
+const ItemList = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const BranchesPage = () => {
     );
 };
 
-export default BranchesPage;
+export default ItemList;

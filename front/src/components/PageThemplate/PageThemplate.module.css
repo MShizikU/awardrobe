@@ -21,6 +21,7 @@
     border-radius: 10px;
     padding: 40px;
     flex: 1 0 0;
+    gap: 15px;
 }
 
 .page_label{

@@ -20,99 +20,38 @@ export default class CompanyStore{
         this.isLoading = state;
     }
 
-    createCompany = async (status, name, inn, p_address, l_address, manager_id) => {
-        try {
-            this.isLoadingState = true;
-            const response = await $api.post('/company', {
-                status: status,
-                name: name,
-                inn: inn,
-                physical_address: p_address,
-                legal_address: l_address,
-                manager_id: manager_id,
-            });
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    createCompany = async (status, name, inn, p_address, l_address, manager_id) => await this.rootStore.performRequest($api.post('/company', {
+        status: status,
+        name: name,
+        inn: inn,
+        physical_address: p_address,
+        legal_address: l_address,
+        manager_id: manager_id,
+    }));
 
-    getFullCompany = async (id) => {
-        try {
-            this.isLoadingState = true;
-            const response = await $api.get('/company/' + id);
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    getFullCompany = async (id) => await this.rootStore.performRequest($api.get('/company/' + id));
 
-    getCompaniesByFilter = async (id, status, name, inn, p_address, l_address, manager_id) => {
-        try {
-            this.isLoadingState = true;
-            const response = await $api.post('/companies/filter', {
-                id: id,
-                status: status,
-                name: name,
-                inn: inn,
-                physical_address: p_address,
-                legal_address: l_address,
-                manager_id: manager_id
-            });
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    getCompaniesByFilter = async (id, status, name, inn, p_address, l_address, manager_id) => await this.rootStore.performRequest($api.post('/companies/filter', {
+        id: id,
+        status: status,
+        name: name,
+        inn: inn,
+        physical_address: p_address,
+        legal_address: l_address,
+        manager_id: manager_id
+    }));
 
-    getAllCompanies = async () => {
-        try {
-            this.isLoadingState = true;
-            const response = await $api.get('/companies');
-            console.log(response);
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    getAllCompanies = async () => await this.rootStore.performRequest($api.get('/companies'));
 
-    updateCompany = async (id, status, name, inn, p_address, l_address, manager_id) => {
-        try {
-            this.isLoadingState = true;
-            const response= await $api.put('/company/' + id, {
-                status: status,
-                name: name,
-                inn: inn,
-                physical_address: p_address,
-                legal_address: l_address,
-                manager_id: manager_id
-            });
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    updateCompany = async (id, status, name, inn, p_address, l_address, manager_id) => await this.rootStore.performRequest($api.put('/company/' + id, {
+        status: status,
+        name: name,
+        inn: inn,
+        physical_address: p_address,
+        legal_address: l_address,
+        manager_id: manager_id
+    }));
 
-    deleteCompany = async (id) => {
-        try {
-            this.isLoadingState = true;
-            const response = await $api.delete("/company/" + id);
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    deleteCompany = async (id) => await this.rootStore.performRequest($api.delete("/company/" + id));
 
 }

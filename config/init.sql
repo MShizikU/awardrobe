@@ -16,8 +16,8 @@ CREATE TABLE users(
 CREATE TABLE companies(
     id SERIAL PRIMARY KEY,
     status TEXT NOT NULL, -- active, inactive, deleted, blocked
-    name TEXT NOT NULL UNIQUE,
-    inn TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
+    inn TEXT NOT NULL,
     physical_address TEXT NOT NULL,
     legal_address TEXT NOT NULL,
     manager_id INTEGER REFERENCES users(id) NOT NULL

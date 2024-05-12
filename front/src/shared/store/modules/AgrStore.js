@@ -21,96 +21,36 @@ export default class AgrStore{
         this.isLoading = state;
     }
 
-    createAgr = async (status, open_time, close_time, executor_id, branch_id) => {
-        try {
-            this.isLoadingState = true;
-            const response = await $api.post('/agr', {
-                status: status,
-                open_time: open_time,
-                close_time: close_time,
-                executor_id: executor_id,
-                branch_id: branch_id
-            });
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    createAgr = async (status, open_time, close_time, executor_id, branch_id) => await this.rootStore.performRequest($api.post('/agr', {
+        status: status,
+        open_time: open_time,
+        close_time: close_time,
+        executor_id: executor_id,
+        branch_id: branch_id
+    }));
 
-    getFullAgr = async (id) => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.get('/agr/' + id);
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    getFullAgr = async (id) => await this.rootStore.performRequest($api.get('/agr/' + id));
 
-    getAgrByFilter = async (id, status, open_time, close_time, executor_id, branch_id) => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.post('/agrs/filter', {
-                id: id,
-                status: status,
-                open_time: open_time,
-                close_time: close_time,
-                executor_id: executor_id,
-                branch_id: branch_id
-            });
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    getAgrByFilter = async (id, status, open_time, close_time, executor_id, branch_id) => await this.rootStore.performRequest($api.post('/agrs/filter', {
+        id: id,
+        status: status,
+        open_time: open_time,
+        close_time: close_time,
+        executor_id: executor_id,
+        branch_id: branch_id
+    }));
 
-    getAllAgrs = async () => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.get('/agrs');
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    getAllAgrs = async () => await this.rootStore.performRequest($api.get('/agrs'));
 
-    updateAgr = async (id, status, open_time, close_time, executor_id, branch_id) => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.put('/agr/' + id, {
-                status: status,
-                open_time: open_time,
-                close_time: close_time,
-                executor_id: executor_id,
-                branch_id: branch_id
-            })
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    updateAgr = async (id, status, open_time, close_time, executor_id, branch_id) => await this.rootStore.performRequest($api.put('/agr/' + id, {
+        status: status,
+        open_time: open_time,
+        close_time: close_time,
+        executor_id: executor_id,
+        branch_id: branch_id
+    }));
 
-    deleteAgr = async (id) => {
-        try {
-            this.isLoadingState = true;
-            const response = $api.delete("/agr/" + id)
-            return response.data;
-        } catch (e) {
-            this.rootStore.httpError(e);
-        } finally {
-            this.isLoadingState = false;
-        }
-    }
+    deleteAgr = async (id) => await this.rootStore.performRequest($api.delete("/agr/" + id));
 
 
 }

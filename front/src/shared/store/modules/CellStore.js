@@ -12,19 +12,19 @@ export default class CellStore{
         this.rootStore = rootStore;
     }
 
-    createCell = async (status, agr_id) => await $api.post('/cell', {
+    createCell = async (status, agr_id) => await this.rootStore.performRequest($api.post('/cell', {
         status: status,
         agr_id: agr_id
-    });
+    }));
 
-    createCellsMultiple = async (agr_id, amount) => await $api.post('/cell', {
+    createCellsMultiple = async (agr_id, amount) => await this.rootStore.performRequest($api.post('/cell', {
         agr_id: agr_id,
         amount: amount
-    });
+    }));
 
-    getFullCell = async (id) => await $api.get(`/cells/${id}`);
+    getFullCell = async (id) => await this.rootStore.performRequest($api.get(`/cells/${id}`));
 
-    getCells = async () => await $api.get(`/cells`);
+    getCells = async () =>  await this.rootStore.performRequest($api.get(`/cells`));
 
     getCellsByFilter = async(id, status, sequence_number, user_id, agr_id) =>
         await this.rootStore.performRequest($api.post(`/cells/filter`, {

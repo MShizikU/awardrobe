@@ -1,35 +1,34 @@
 import React, {useContext, useEffect, useState} from 'react';
 import PageThemplate from "../../../components/PageThemplate/PageThemplate";
 import {Context} from "../../../index";
-import CompanyItem from "../../../components/CompanyItem/CompanyItem";
-import cls from "./CompaniesPage.module.css"
-import {observer} from "mobx-react-lite";
 import Button from "../../../shared/UI/Button/Button";
-import Form from "../../../enities/Form/Form";
 import Modal from "../../../shared/UI/Modal/Modal";
+import Form from "../../../enities/Form/Form";
+import cls from "./BranchesPage.module.css";
+import BranchItem from "../../../components/BranchItem/BranchItem";
 
-const CompaniesPage = () => {
+const BranchesPage = () => {
+
     const {store} = useContext(Context);
-    const [companiesList, setCompaniesList] = useState([]);
+    const [branchesList, setBranchesList] = useState([]);
     const [wasChanged, setWasChanged] = useState(false);
     const [isAddVisible, setIsAddVisible] = useState(false);
 
-    const fetchCompanies = async () => {
-        const companies = await store.companies.getAllCompanies();
-        console.log(companies)
-        setCompaniesList(companies);
+    const fetchBranches = async () => {
+        const branches = await store.branches.getAllBranches();
+        setBranchesList(branches);
     };
 
     useEffect(() => {
-        console.log("triggered");
-        fetchCompanies().then();
+        fetchBranches().then();
     }, [wasChanged]);
+
     return (
         <PageThemplate
-        label="Компании">
-            <div className={cls.companies_wrapper}>
-                {companiesList.map(comp =>
-                    <CompanyItem key={comp.id} company={comp} wasChanged={wasChanged} setWasChanged={setWasChanged} />
+            label="Филиалы">
+            <div className={cls.branches_wrapper}>
+                {branchesList.map(branch =>
+                    <BranchItem key={branch.id} branch={branch} wasChanged={wasChanged} setWasChanged={setWasChanged} />
                 )}
             </div>
             <Button
@@ -43,7 +42,7 @@ const CompaniesPage = () => {
                 setVisible={setIsAddVisible}
             >
                 <Form
-                    label={"Добавление компании"}
+                    label={"Добавление филиала"}
                     fields={[
                         {
                             type: 'text',
@@ -57,27 +56,17 @@ const CompaniesPage = () => {
                         },
                         {
                             type: 'text',
-                            placeholder: '12345',
-                            label: 'ИНН'
-                        },
-                        {
-                            type: 'text',
-                            placeholder: 'г. Кемерово, д.3',
-                            label: 'Физический адрес'
-                        },
-                        {
-                            type: 'text',
-                            placeholder: 'г. Кемерово, д.3',
-                            label: 'Юридический адрес'
+                            placeholder: '1',
+                            label: 'ID менеджера'
                         },
                         {
                             type: 'text',
                             placeholder: '1',
-                            label: 'ID менеджера'
+                            label: 'ID компании'
                         },
                     ]}
-                    basicAction={async (status, name, inn, p_address, l_address, manager_id) => {
-                        store.companies.createCompany( status, name, inn, p_address, l_address, manager_id).then(() => {
+                    basicAction={async (status, name, manager_id, company_id) => {
+                        store.branches.createBranch( status, name, manager_id, company_id ).then(() => {
                             setWasChanged(!wasChanged)
                         });
                         setIsAddVisible(false);
@@ -89,9 +78,8 @@ const CompaniesPage = () => {
                     secondaryButtonText={"Отменить"}
                 ></Form>
             </Modal>
-
         </PageThemplate>
     );
 };
 
-export default observer(CompaniesPage);
+export default BranchesPage;

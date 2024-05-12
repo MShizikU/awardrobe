@@ -9,10 +9,11 @@ import {Context} from "../../index";
 const CompanyItem = ({company, wasChanged, setWasChanged}) => {
     const [isEditVisible, setIsEditVisible] = React.useState(false);
     const {store} = useContext(Context);
+    const id = company.id + "";
     return (
         <div className={cls.company_folder}>
             <div className={cls.company_top_row}>
-                <div className={cls.company_name}>{company.name}</div>
+                <div className={cls.company_name}>{company.name} #{id.padStart(4, "0")}</div>
                 <div className={cls.company_actions}>
                     <EditButton action={()=>{setIsEditVisible(true)}} />
                     <DeleteButton action={ () => {
@@ -74,13 +75,13 @@ const CompanyItem = ({company, wasChanged, setWasChanged}) => {
                         },
                         {
                             type: 'text',
-                            placeholder: '12345',
+                            placeholder: 'г. Кемерово, д.3',
                             label: 'Юридический адрес',
                             preset: company.legal_address
                         },
                         {
                             type: 'text',
-                            placeholder: '12345',
+                            placeholder: '1',
                             label: 'ID менеджера',
                             preset: company.manager.id
                         },
