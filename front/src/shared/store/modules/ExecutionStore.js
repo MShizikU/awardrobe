@@ -1,6 +1,6 @@
 import type AppStore from "../AppStore";
 import {action, computed, makeAutoObservable, observable} from "mobx";
-import $api from "../../../http";
+import $api, {API_URL} from "../../../http";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import params from "sockjs-client/lib/transport/receiver/jsonp";
@@ -36,7 +36,7 @@ export default class ExecutionStore {
         if (!this.connected){
             const Stomp = require("stompjs");
             var SockJS = require("sockjs-client");
-            SockJS = new SockJS("http://localhost:8081/ws");
+            SockJS = new SockJS(API_URL + "/ws");
             this.stompClient = Stomp.over(SockJS);
             this.stompClient.connect({}, this.onConnected, this.onError);
         }
