@@ -8,12 +8,13 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: password
       POSTGRES_DB: awardrobe
+    networks:
+      - delivery
     ports:
       - "5433:5432"
     volumes:
-      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./config/init.sql:/docker-entrypoint-initdb.d/ainit.sql
       - ./config/init-data.sql:/docker-entrypoint-initdb.d/test-adata.sql
-      - ./config/test-data.sql:/docker-entrypoint-initdb.d/test-bdata.sql
 
   app:
     build:
@@ -23,6 +24,8 @@ services:
       - "8081:8080"
     depends_on:
       - db
+    networks:
+      - delivery
     environment:
       - SERVER_PORT=8080
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/awardrobe
@@ -42,6 +45,11 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
+      - ./front:/app
     depends_on:
       - app
+    networks:
+      - delivery
+
+networks:
+  delivery:

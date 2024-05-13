@@ -20,10 +20,6 @@ const ItemList = ({ fetchItems, createItem, renderItem, filterFields}) => {
     };
 
     useEffect(() => {
-        console.log("finaly");
-    },[])
-
-    useEffect(() => {
         fetchData();
         setIsAddVisible(false);
     }, [store.hasUpdate, wasChanged, filter]);
