@@ -26,7 +26,7 @@ const UsersPage = () => {
                         { name: 'status', placeholder: 'Статус', label: 'статусу' },
                         { name: 'username', placeholder: 'Shiz', label: 'имени' },
                         { name: 'email', placeholder: 'shiz@mail.ru', label: 'email' },
-                        { name: 'role_id', placeholder: 'ID', label: 'ID роли' }
+                        { name: 'role_id', placeholder: 'ID', label: 'ID роли' },
                     ]
                 }
             />

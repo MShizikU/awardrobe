@@ -112,10 +112,11 @@ export default class UserStore {
         return false;
     }
 
-    updateUser = async(id, status, email, role_id) => await this.rootStore.performRequest($api.put(`/users/${id}`, {
+    updateUser = async(id, status, email, role_id, branch_id) => await this.rootStore.performRequest($api.put(`/users/${id}`, {
         status: status,
         email: email,
-        role_id: role_id
+        role_id: role_id,
+        branch_id: branch_id,
     }), true);
 
     delete = async (id) => await this.rootStore.performRequest($api.delete(`/users/${id}`), true);

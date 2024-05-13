@@ -11,41 +11,60 @@ const ChooseAgrPage = () => {
     const {store} = useContext(Context);
     const params = useParams();
     const navigate = useNavigate();
-    const branchId = params.id;
+    const [branchId, setBranchId] = useState(params.id);
     const [optimalAgr, setOptimalAgr] = useState(null);
     useEffect(() => {
-        async function fetchOptimalAgr() {
-            setOptimalAgr(await store.agrs.getOptimal(branchId))
+        async function fetchOptimalAgr(){
+            await store.getCurrentUser().then(async (result) => {
+                store.user = result;
+                if (branchId == null) setBranchId(store.user.branch_id);
+                if (store.user.role.name !== "EXECUTOR") setOptimalAgr(await store.agrs.getOptimal(branchId))
+            })
+
         }
 
         fetchOptimalAgr();
     }, []);
     return (
         <PageThemplate label ="Выберите ряд">
-            <div className={cls.recomended_agr} style={{cursor: optimalAgr != null ? "pointer" : "default"}} onClick={() => {if (optimalAgr !== undefined && optimalAgr !== null) navigate(`/agr/${optimalAgr.id}`)}}>
-                {optimalAgr !== undefined && optimalAgr !== null
-                    ? "Рекомендован ряд #" + (optimalAgr.id).toString().padStart(4, "0")
-                    : "Все ряды заняты"
-                }
-            </div>
-            <ItemList
-                fetchItems={(filter) => store.agrs.getAgrByFilter(filter.id, "active", null ,null, null, branchId)}
-                createItem={null}
+            {
+                store.isLoading || branchId == null ? <div></div> :
+                <div>
+                    {
+                        store.user.role.name !== "EXECUTOR" ?
+                        <div className={cls.recomended_agr} style={{cursor: optimalAgr != null ? "pointer" : "default"}}
+                             onClick={() => {
+                                 if (optimalAgr !== undefined && optimalAgr !== null) navigate(`/agr/${optimalAgr.id}`)
+                             }}>
+                            {optimalAgr !== undefined && optimalAgr !== null
+                                ? "Рекомендован ряд #" + (optimalAgr.id).toString().padStart(4, "0")
+                                : "Все ряды заняты"
+                            }
+                        </div>
+                            :<div></div>
+                    }
+                    <ItemList
+                        fetchItems={(filter) => store.agrs.getAgrByFilter(filter.id, "active", null, null, null, branchId)}
+                        createItem={null}
 
-                renderItem={({ key, item, wasChanged, setWasChanged }) => (
-                    <UserChooseItem key={key} item={item} baseUrl={"agr"} text={"Ряд #" + item.id.toString().padStart(4, "0")}/>
-                )}
+                        renderItem={({key, item, wasChanged, setWasChanged}) => (
+                            <UserChooseItem key={key} item={item} baseUrl={"agr"}
+                                            text={"Ряд #" + item.id.toString().padStart(4, "0")}/>
+                        )}
 
-                ListFilter={({ filter, setFilter }) => (
-                    <ListFilter filter={filter} setFilter={setFilter} />
-                )}
+                        ListFilter={({filter, setFilter}) => (
+                            <ListFilter filter={filter} setFilter={setFilter}/>
+                        )}
 
-                filterFields={
-                    [
-                        { name: 'id', placeholder: 'ID', label: 'ID' }
-                    ]
-                }
-            />
+                        filterFields={
+                            [
+                                {name: 'id', placeholder: 'ID', label: 'ID'}
+                            ]
+                        }
+                    />
+                </div>
+            }
+
 
         </PageThemplate>
     );

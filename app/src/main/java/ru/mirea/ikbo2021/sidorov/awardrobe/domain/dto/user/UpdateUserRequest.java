@@ -22,6 +22,11 @@ public record UpdateUserRequest(
         @Schema(description = "Роль пользователя", example = "1")
         @NotNull(message = "Значение не может быть пустое")
         @Min(value = 1, message = "ID должен быть больше 1")
-        Long role_id
+        Long role_id,
+
+        @Schema(description = "Филиал пользователя", example = "1")
+        @NotNull(message = "Значение не может быть пустое")
+        @Min(value = 1, message = "ID должен быть больше 1")
+        Long branch_id
 ) {
 }

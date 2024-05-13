@@ -7,6 +7,8 @@ import AgrStore from "./modules/AgrStore";
 import CellStore from "./modules/CellStore";
 import {useNavigate} from "react-router-dom";
 import VisitStore from "./modules/VisitStore";
+import ExecutionStore from "./modules/ExecutionStore";
+import $api from "../../http";
 
 export default class AppStore {
 
@@ -16,6 +18,7 @@ export default class AppStore {
     agrs = new AgrStore(this);
     cells = new CellStore(this);
     visits = new VisitStore(this);
+    execution = new ExecutionStore(this);
 
     userState = null;
     isAuthState = false;
@@ -56,6 +59,7 @@ export default class AppStore {
             agrs: false,
             cells: false,
             visits: false,
+            execution: false,
             hasUpdate: observable,
             isLoading: observable,
             isAuthState: observable,
@@ -148,6 +152,8 @@ export default class AppStore {
     isExecutor(): boolean {
         return this.user?.role.name === 'EXECUTOR' || this.isAdmin();
     }
+
+    getCurrentUser = async() => await this.performRequest($api.get("/users/current"));
 
     performRequest = async (request, isUpdate = false) => {
         try {

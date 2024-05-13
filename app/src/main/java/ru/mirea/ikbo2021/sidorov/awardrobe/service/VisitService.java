@@ -36,7 +36,7 @@ public class VisitService {
     public void createVisit(Long user_id, Cell cell){
         var user = userService.getByIdStrict(user_id);
 
-        if (repository.findByUserIdAndEndTime(user_id, null).isPresent()) throw new VisitAlreadyExists(user_id, cell.getId());
+        if (repository.findByUserIdAndEndTimeNull(user_id).isPresent()) throw new VisitAlreadyExists(user_id, cell.getId());
 
         save(
                 Visit.builder()
@@ -52,11 +52,9 @@ public class VisitService {
      * @param user_id пользователь
      */
     public void closeVisit(Long user_id){
-        var user = userService.getByIdStrict(user_id);
-        var visit = repository.findByUserIdAndEndTime(user_id, null);
+        var visit = repository.findByUserIdAndEndTimeNull(user_id);
         if (visit.isEmpty()) throw new EntityNotFound("visit", "user_id", user_id.toString());
         var toUpdate = visit.get();
-        toUpdate.setUser(null);
         toUpdate.setEnd_time(new Timestamp(System.currentTimeMillis()));
         save(
             toUpdate

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Context} from "../../../index";
 import PageThemplate from "../../../components/PageThemplate/PageThemplate";
@@ -8,10 +8,22 @@ import {observer} from "mobx-react-lite";
 import VisitItem from "../../../components/Items/VisitItem/VisitItem";
 import ListFilter from "../../../components/ListFilter/ListFilter";
 import ItemList from "../../../enities/ItemList/ItemList";
+import {over} from 'stompjs';
+import SockJS from 'sockjs-client';
+
+var stompClient =null;
 
 const UserPage = () => {
     const {store} = useContext(Context);
     const navigate = useNavigate();
+
+
+    const onError = (err) => {
+        console.log(err);
+
+    }
+
+
     return (
         <PageThemplate
         label={"Пользователь"}>

@@ -1,6 +1,7 @@
 package ru.mirea.ikbo2021.sidorov.awardrobe.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.UserResponse;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.User;

@@ -2,17 +2,19 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum ExecutionStatus {
+public enum ExecutionActionShow {
     CONNECT("connect"),
-    ACCEPT("accept"),
-    SEND("send"),
-    ERROR("error"),
+    WAITING("waiting"),
+    TRANSFER("transfer"),
+    ACCEPT_TRANSFER("accept_transfer"),
     SUCCESS("success"),
-    DELETE("delete");
+    ERROR("error");
+
+
 
     private final String status;
 
-    ExecutionStatus(String status) {
+    ExecutionActionShow(String status) {
         this.status = status;
     }
 

@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.*;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.User;
@@ -72,8 +71,8 @@ public class UserController {
      * Изменение компании пользователя
      */
     @Operation(summary = "Изменение компании пользователя")
-    @PutMapping("/change-company")
-    public void changeCompany(@RequestBody @Valid UpdateUserCompanyRequest request){
+    @PutMapping("/change-branch")
+    public void changeCompany(@RequestBody @Valid UpdateUserBranchRequest request){
         service.changeCompany(request);
     }
 

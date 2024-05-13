@@ -52,25 +52,31 @@ const UserItem = ({user, wasChanged, setWasChanged}) => {
                     fields={[
                         {
                             type: 'text',
-                            placeholder: 'ACTIVE',
+                            placeholder: 'active',
                             label: 'Статус',
                             preset: user.status
                         },
                         {
                             type: 'text',
-                            placeholder: 'ACTIVE',
+                            placeholder: 'test@mail.ru',
                             label: 'email',
                             preset: user.email
                         },
                         {
                             type: 'text',
-                            placeholder: 'ACTIVE',
+                            placeholder: '1',
                             label: 'ID роли',
                             preset: user.role.id
+                        },
+                        {
+                            type: 'text',
+                            placeholder: '1',
+                            label: 'ID филиала',
+                            preset: user.branch == null ? "" : user.branch.id
                         }
                     ]}
-                    basicAction={async (status, name, inn, p_address, l_address, manager_id) => {
-                        store.users.updateUser(user.id, status, name, inn, p_address, l_address, manager_id).then(() => {
+                    basicAction={async (status, email, role_id, branch_id) => {
+                        store.users.updateUser(user.id, status, email, role_id, branch_id).then(() => {
                             setWasChanged(!wasChanged)
                         });
                         setIsEditVisible(false);

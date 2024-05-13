@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Visit;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,7 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
     )
     public List<Visit> findByFilter(Long id, Long cell_id, Long user_id);
 
-    @Query("SELECT v FROM Visit v WHERE v.user.id = :user_id AND v.end_time = :endTime")
-    public Optional<Visit> findByUserIdAndEndTime(Long user_id, Timestamp endTime);
+    @Query("SELECT v FROM Visit v WHERE v.user.id = :user_id AND v.end_time is NULL")
+    public Optional<Visit> findByUserIdAndEndTimeNull(Long user_id);
+
 }

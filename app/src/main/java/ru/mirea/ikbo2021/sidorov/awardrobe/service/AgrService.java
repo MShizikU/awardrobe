@@ -100,8 +100,17 @@ public class AgrService {
         return max.orElse(null);
     }
 
-    public void setAgrExecutor(Long agrId, Long executorId, String wsId){
+    public void setAgrExecutor(Long agrId, Long executorId){
+        var agr = getByIdStrict(agrId);
+        var executor = userService.getByIdStrict(executorId);
+        agr.setExecutor(executor);
+        repository.save(agr);
+    }
 
+    public void removeAgrExecutor(long agrId){
+        var agr = getByIdStrict(agrId);
+        agr.setExecutor(null);
+        repository.save(agr);
     }
 
 

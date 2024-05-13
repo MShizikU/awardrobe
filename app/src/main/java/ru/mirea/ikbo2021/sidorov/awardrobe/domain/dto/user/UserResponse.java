@@ -2,6 +2,8 @@ package ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Branch;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Company;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.UserRole;
 
 @Builder
@@ -23,7 +25,10 @@ public record UserResponse (
     String status,
 
     @Schema(description = "Роль пользователя", example = "USER")
-    UserRole role
+    UserRole role,
+
+    @Schema(description = "Филиал", example = "1")
+    Long branch_id
 
 ){
 }

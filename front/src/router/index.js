@@ -3,7 +3,7 @@ import Registration from "../pages/utlis/Registration";
 import ChooseCompanyPage from "../pages/awardobe/ChooseCompanyPage/ChooseCompanyPage";
 import ChooseBranchPage from "../pages/awardobe/ChooseBranchPage/ChooseBranchPage";
 import ChooseAgrPage from "../pages/awardobe/ChooseAgrPage/ChooseAgrPage";
-import PerformAutomativeWardrobe from "../pages/awardobe/PerformAutomativeWardrobe";
+import PerformAutomativeWardrobe from "../pages/awardobe/PerformAutomatioveWardrobe/PerformAutomativeWardrobe";
 import CompaniesPage from "../pages/admin/CompaniesPage/CompaniesPage";
 import BranchesPage from "../pages/admin/BranchesPage/BranchesPage";
 import AgrsPage from "../pages/admin/AgrsPage/AgrsPage";
@@ -23,7 +23,7 @@ export const adminRoutes = [
 ]
 
 export const executorRoutes = [
-    { path: "/company", element: <BranchesPage />, exact: true },
+    { path: "/company", element: <ChooseAgrPage />, exact: true },
     { path: '/agr/:id', element: <PerformAutomativeWardrobe />, exact: true  },
     { path: '/user', element: <UserPage />, exact: true  }
 ]
