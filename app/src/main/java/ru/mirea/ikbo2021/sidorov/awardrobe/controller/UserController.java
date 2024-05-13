@@ -68,6 +68,15 @@ public class UserController {
     }
 
     /**
+     * Изменение почты пользователя
+     */
+    @Operation(summary = "Изменение почты пользователя")
+    @PutMapping("/change-email")
+    public void changeEmail(@RequestBody @Valid UpdateUserEmailRequest request) {
+        service.changeEmail(request);
+    }
+
+    /**
      * Изменение компании пользователя
      */
     @Operation(summary = "Изменение компании пользователя")

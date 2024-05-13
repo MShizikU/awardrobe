@@ -39,7 +39,7 @@ const AppRouter = () => {
                                 key={route.path}
                             />
                         )}
-                        <Route path="*" element={<UsersPage/>}  />
+                        <Route path="*" element={<UserPage/>}  />
                     </Routes>
                 :
                     <Routes>

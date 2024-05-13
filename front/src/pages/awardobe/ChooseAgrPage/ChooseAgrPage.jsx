@@ -14,6 +14,8 @@ const ChooseAgrPage = () => {
     const [branchId, setBranchId] = useState(params.id);
     const [optimalAgr, setOptimalAgr] = useState(null);
     useEffect(() => {
+        store.cells.getCurrentCell().then((response) => response != null ? navigate(`/agr/${response.agr_id}`) : "")
+
         async function fetchOptimalAgr(){
             await store.getCurrentUser().then(async (result) => {
                 store.user = result;
@@ -22,6 +24,7 @@ const ChooseAgrPage = () => {
             })
 
         }
+
 
         fetchOptimalAgr();
     }, []);
@@ -44,7 +47,7 @@ const ChooseAgrPage = () => {
                             :<div></div>
                     }
                     <ItemList
-                        fetchItems={(filter) => store.agrs.getAgrByFilter(filter.id, "active", null, null, null, branchId)}
+                        fetchItems={(filter) => store.agrs.getAgrByFilter(filter.id, store.isExecutor() ? "inactive" : "active", null, null, null, branchId)}
                         createItem={null}
 
                         renderItem={({key, item, wasChanged, setWasChanged}) => (

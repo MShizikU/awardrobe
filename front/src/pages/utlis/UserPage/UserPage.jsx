@@ -10,12 +10,16 @@ import ListFilter from "../../../components/ListFilter/ListFilter";
 import ItemList from "../../../enities/ItemList/ItemList";
 import {over} from 'stompjs';
 import SockJS from 'sockjs-client';
+import Form from "../../../enities/Form/Form";
+import Modal from "../../../shared/UI/Modal/Modal";
+import {message} from "antd";
 
 var stompClient =null;
 
 const UserPage = () => {
     const {store} = useContext(Context);
     const navigate = useNavigate();
+    const [isEditVisible, setIsEditVisible] = useState(false);
 
 
     const onError = (err) => {
@@ -61,14 +65,24 @@ const UserPage = () => {
                             ********
                         </div>
                     </div>
-                    <Button
-                        className={"main"}
-                        action={
-                            () => {
-                                store.logout();
-                                navigate("/login");
-                            }
-                        }>Выйти</Button>
+                    <div className={cls.btn_row}>
+                        <Button
+                            className={"main"}
+                            action={
+                                () => {
+                                    store.logout();
+                                    navigate("/login");
+                                }
+                            }>Выйти</Button>
+                        <Button
+                            className={"secondary"}
+                            action={
+                                () => {
+                                    setIsEditVisible(true);
+                                }
+                            }>Изменить</Button>
+                    </div>
+
                 </div>
                 <div className={cls.visits}>
                     <div className={cls.visits_label}>
@@ -95,6 +109,32 @@ const UserPage = () => {
                 </div>
 
             </div>
+            <Modal
+                visible={isEditVisible}
+                setVisible={setIsEditVisible}
+                >
+            <Form
+                label={"Сменить почту"}
+                fields={[
+                    {
+                        type: 'text',
+                        placeholder: 'active',
+                        label: 'Статус',
+                        preset: store.user.email
+                    }
+                ]}
+                basicAction={async (email) => {
+                    await store.users.changeEmail(store.user.id, email);
+                    setIsEditVisible(false);
+                    message("Перезагрузите страницу что бы увидеть изменения");
+                }}
+                secondaryAction={(username, password) => {
+                    setIsEditVisible(false)
+                }}
+                actionButtonText={"Сохранить"}
+                secondaryButtonText={"Отменить"}
+            ></Form>
+        </Modal>
         </PageThemplate>
     );
 };

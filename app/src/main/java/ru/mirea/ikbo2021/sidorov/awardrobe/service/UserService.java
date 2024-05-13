@@ -256,4 +256,12 @@ public class UserService {
         return false;
     }
 
+    public void changeEmail(UpdateUserEmailRequest request) {
+        if (repository.existsByEmail(request.email())) {
+            throw new UserNotUniqueEmailProblem(request.email());
+        }
+        var user = getByIdStrict(request.id());
+        user.setEmail(request.email());
+        save(user);
+    }
 }

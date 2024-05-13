@@ -48,6 +48,9 @@ public interface VisitMapper {
     }
 
     default String formatTimestamp(Timestamp timestamp) {
+        if (timestamp == null) {
+            return "";
+        }
         return timestamp.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }

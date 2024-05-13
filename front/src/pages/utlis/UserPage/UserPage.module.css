@@ -48,3 +48,10 @@
     font-weight: 500;
     line-height: 21px;
 }
+.btn_row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+}

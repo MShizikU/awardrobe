@@ -51,6 +51,14 @@ export default class AppStore {
         this.isSuperAdminState = value;
     }
 
+    get loading(){
+        return this.isLoading;
+    }
+
+    set loading(value) {
+        this.isLoading = value;
+    }
+
     constructor() {
         makeAutoObservable(this, {
             users: false,
@@ -68,7 +76,8 @@ export default class AppStore {
             isExecutor: action.bound,
             userState: observable,
             user: computed,
-            checkSuperAdmin: action.bound
+            checkSuperAdmin: action.bound,
+            loading: computed
             },
             {
                 deep: true
@@ -134,10 +143,15 @@ export default class AppStore {
                     message.error('Не найдено');
                     break;
                 default:
-                    notification.error({
-                        message: e.response.data.title,
-                        description: e.response.data.detail,
-                    }, 10);
+                    if (e.response.data.timestamp != null){
+                        this.logout();
+                    }else {
+                        notification.error({
+                            message: e.response.data.title,
+                            description: e.response.data.detail,
+                        }, 10);
+                    }
+
             }
         } else {
             message.error(msg);
@@ -157,7 +171,7 @@ export default class AppStore {
 
     performRequest = async (request, isUpdate = false) => {
         try {
-            this.isLoading = true;
+            this.loading = true;
             const response = await request;
             return response.data;
         }
@@ -168,7 +182,7 @@ export default class AppStore {
             if (isUpdate){
                 this.hasUpdate = !this.hasUpdate;
             }
-            this.isLoading = false;
+            this.loading = false;
         }
         return [];
     }

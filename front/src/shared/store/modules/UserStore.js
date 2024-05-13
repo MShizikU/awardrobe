@@ -66,6 +66,8 @@ export default class UserStore {
         role_id: role_id
     }));
 
+    changeEmail = async (id, email) => this.rootStore.performRequest($api.put('/users/change-email', {id: id, email: email}));
+
     changeRole = async (id, role) => {
         const requestData = {
             id: id,

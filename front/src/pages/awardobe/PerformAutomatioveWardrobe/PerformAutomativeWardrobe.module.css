@@ -1,0 +1,27 @@
+.perform_page{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cell_data{
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--brown);
+}
+
+.result{
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--red);
+}
+
+.error_button{
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--red);
+}

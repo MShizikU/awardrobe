@@ -47,9 +47,27 @@ public class ExecutionController {
                 var result = false;
                 if (cell.getUser() == null){
                     cellService.setUserInCell(chatMessage.getUserId(), chatMessage.getAgrId(), chatMessage.getCellId() );
+                    messagingTemplate.convertAndSendToUser(
+                            chatMessage.getUserId().toString(),"/queue/messages",
+                            new ExecutionResult(
+                                    chatMessage.getUserId(),
+                                    chatMessage.getCellId().toString(),
+                                    ExecutionStatus.SUCCESS,
+                                    ExecutionActionShow.SUCCESS_MORE
+                            )
+                    );
                 }
                 else{
                     cellService.removeUser(chatMessage.getUserId());
+                    messagingTemplate.convertAndSendToUser(
+                            chatMessage.getUserId().toString(),"/queue/messages",
+                            new ExecutionResult(
+                                    chatMessage.getUserId(),
+                                    chatMessage.getCellId().toString(),
+                                    ExecutionStatus.SUCCESS,
+                                    ExecutionActionShow.SUCCESS_FINAL
+                            )
+                    );
                 }
                 messagingTemplate.convertAndSendToUser(
                         agr.getExecutor().getId().toString(),"/queue/messages",
@@ -60,15 +78,7 @@ public class ExecutionController {
                                 ExecutionActionShow.WAITING
                         )
                 );
-                messagingTemplate.convertAndSendToUser(
-                        chatMessage.getUserId().toString(),"/queue/messages",
-                        new ExecutionResult(
-                                chatMessage.getUserId(),
-                                chatMessage.getCellId().toString(),
-                                ExecutionStatus.SUCCESS,
-                                ExecutionActionShow.SUCCESS
-                        )
-                );
+
             }
             else if (chatMessage.getStatus().equals(ExecutionStatus.DELETE)){
                 service.removeAgrExecutor(chatMessage.getAgrId());

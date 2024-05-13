@@ -7,7 +7,8 @@ public enum ExecutionActionShow {
     WAITING("waiting"),
     TRANSFER("transfer"),
     ACCEPT_TRANSFER("accept_transfer"),
-    SUCCESS("success"),
+    SUCCESS_FINAL("success_final"),
+    SUCCESS_MORE("success_more"),
     ERROR("error");
 
 

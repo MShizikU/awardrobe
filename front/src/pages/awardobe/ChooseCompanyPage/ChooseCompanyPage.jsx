@@ -1,13 +1,18 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import PageThemplate from "../../../components/PageThemplate/PageThemplate";
 import CompanyItem from "../../../components/Items/CompanyItem/CompanyItem";
 import ListFilter from "../../../components/ListFilter/ListFilter";
 import ItemList from "../../../enities/ItemList/ItemList";
 import {Context} from "../../../index";
 import UserChooseItem from "../../../components/Items/UserChooseItem/UserChooseItem";
+import {useNavigate} from "react-router-dom";
 
 const ChooseCompanyPage = () => {
     const {store} = useContext(Context);
+    const navigate = useNavigate();
+    useEffect(() => {
+        store.cells.getCurrentCell().then((response) => response.length > 0 ? navigate(`/agr/${response[0].agr_id}`) : "")
+    }, [])
     return (
         <PageThemplate
             label="Выберите компанию">
