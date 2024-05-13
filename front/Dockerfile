@@ -1,7 +1,8 @@
 FROM node:slim
+RUN mkdir -p /app
 WORKDIR /app
-COPY ./package*.json ./app
+ADD . .
 RUN npm install react-scripts && npm install
-COPY . .
+
 EXPOSE 3000
 CMD ["npm", "start"]
