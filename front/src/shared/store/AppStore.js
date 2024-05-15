@@ -5,7 +5,6 @@ import CompanyStore from "./modules/CompanyStore";
 import BranchStore from "./modules/BranchStore";
 import AgrStore from "./modules/AgrStore";
 import CellStore from "./modules/CellStore";
-import {useNavigate} from "react-router-dom";
 import VisitStore from "./modules/VisitStore";
 import ExecutionStore from "./modules/ExecutionStore";
 import $api from "../../http";
@@ -158,12 +157,12 @@ export default class AppStore {
         }
     }
 
-    isAdmin(): boolean {
+    isAdmin() {
         // return true;
         return this.user?.role.name === 'ADMIN';
     }
 
-    isExecutor(): boolean {
+    isExecutor() {
         return this.user?.role.name === 'EXECUTOR' || this.isAdmin();
     }
 
