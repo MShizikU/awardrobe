@@ -1,17 +1,7 @@
-FROM node:13.12.0-alpine
-
+FROM node:slim
 WORKDIR /app
-
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
-
-# add app
-COPY . ./
-
-# start app
+COPY package*.json ./app
+RUN npm install react-scripts && npm install
+COPY . .
+EXPOSE 3000
 CMD ["npm", "start"]
