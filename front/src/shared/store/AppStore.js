@@ -1,4 +1,3 @@
-import React from 'react';
 import {action, computed, makeAutoObservable, observable} from "mobx";
 import UserStore from "./modules/UserStore";
 import {message, notification} from "antd";

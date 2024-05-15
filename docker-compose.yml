@@ -46,7 +46,6 @@ services:
       - "3000:3000"
     volumes:
       - ./front:/app
-    stdin_open: true
     depends_on:
       - app
     networks:

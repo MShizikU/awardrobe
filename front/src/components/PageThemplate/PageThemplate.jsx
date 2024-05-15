@@ -11,12 +11,11 @@ const PageThemplate = ({children, label}) => {
             <div className={cls.page_label}>
                 {label}
             </div>
-            {!store.loading
+            <div className={cls.page_content}>
+                {children}
+            </div>
+            {store.loading
                 ?
-                    <div className={cls.page_content}>
-                        {children}
-                    </div>
-                :
                 <div className={cls.loading}>
                     <div className={cls.lbs_ring}>
                         <div></div>
@@ -25,6 +24,7 @@ const PageThemplate = ({children, label}) => {
                         <div></div>
                     </div>
                 </div>
+                : <div></div>
             }
 
         </div>
