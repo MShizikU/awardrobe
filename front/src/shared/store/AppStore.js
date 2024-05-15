@@ -1,3 +1,4 @@
+import React from 'react';
 import {action, computed, makeAutoObservable, observable} from "mobx";
 import UserStore from "./modules/UserStore";
 import {message, notification} from "antd";
@@ -5,6 +6,7 @@ import CompanyStore from "./modules/CompanyStore";
 import BranchStore from "./modules/BranchStore";
 import AgrStore from "./modules/AgrStore";
 import CellStore from "./modules/CellStore";
+import {useNavigate} from "react-router-dom";
 import VisitStore from "./modules/VisitStore";
 import ExecutionStore from "./modules/ExecutionStore";
 import $api from "../../http";
@@ -157,12 +159,12 @@ export default class AppStore {
         }
     }
 
-    isAdmin() {
+    isAdmin(): boolean {
         // return true;
         return this.user?.role.name === 'ADMIN';
     }
 
-    isExecutor() {
+    isExecutor(): boolean {
         return this.user?.role.name === 'EXECUTOR' || this.isAdmin();
     }
 
