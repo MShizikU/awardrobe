@@ -51,8 +51,6 @@ services:
     networks:
       - delivery
     stdin_open: true
-    environment:
-      -CI=true
 
 networks:
   delivery:
