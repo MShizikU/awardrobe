@@ -1,0 +1,40 @@
+.visit_item{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    background: var(--gray-ll);
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+.visit_item:hover{
+    border: 1px solid var(--red);
+    box-shadow: 0 6px 30px 0 rgba(161, 74, 150, 0.2);
+}
+.visit_id{
+    font-size: 24px;
+    color: var(--brown);
+    line-height: 24px ;
+    font-weight: 600;
+}
+
+.visit_time{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    color: var(--red);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sub_data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-medium);
+}

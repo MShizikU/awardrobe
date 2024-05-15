@@ -42,10 +42,17 @@ public class AgrController {
     }
 
     @Operation(summary = "Получение фильтрованного списка гардеробных рядов")
-    @GetMapping("/agrs/filter")
+    @PostMapping("/agrs/filter")
     public List<AgrCompactResponse> getByFilter(@RequestBody @Valid AgrFilter filter){
         var agrs = service.getByFilter(filter);
         return mapper.toListCompactResponse(agrs);
+    }
+
+    @Operation(summary = "Получение оптимального ряда")
+    @GetMapping("/agrs/optimal")
+    public AgrCompactResponse getOptimalAgr(@RequestParam Long branchId){
+        var agr = service.getOptimal(branchId);
+        return mapper.toCompactResponse(agr);
     }
 
     @Operation(summary = "Обновление данных гардеробного ряда")

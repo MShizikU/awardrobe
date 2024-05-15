@@ -1,0 +1,9 @@
+.filter_wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.filter_wrapper > div{
+    max-width: 240px;
+}

@@ -13,9 +13,6 @@ public record UserFilter(
         @Schema(description = "Почта пользователя", example = "example@tinkoff.ru")
         String email,
 
-        @Schema(description = "Является ли пользователь одноразовым",example = "true")
-        Boolean isDisposable,
-
         @Schema(description = "Статус пользователя", example = "active")
         String status,
 

@@ -1,0 +1,33 @@
+.cell_folder{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gray-ll);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    padding: 20px;
+    color: var(--red);
+    font-size: 24px;
+    flex: 1 0 10% !important;
+}
+
+.cell_item{
+    flex: 1 0 10% !important;
+    max-width: 10% !important;
+}
+
+.cell_folder:hover{
+    border: 2px dashed var(--red);
+    box-shadow: 0 6px 30px 0 rgba(161, 74, 150, 0.2);
+}
+
+.cell_sub_data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-medium);
+    font-size: 16px;
+    margin-top: 16px;
+}

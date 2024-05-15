@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.user.*;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.User;
@@ -24,7 +23,6 @@ public class UserController {
     /**
      * Получение пользователя по id
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR')")
     @Operation(summary = "Получение пользователя по id")
     @GetMapping("/{userId}")
     public UserResponse getById(@PathVariable Long userId) {
@@ -43,7 +41,6 @@ public class UserController {
     /**
      * Пагинация пользователей по фильтру
      */
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @Operation(summary = "Получение пользователей по фильтру")
     @PostMapping("/filter")
     public List<UserResponse> findUsersByFilter(@RequestBody @Valid UserFilter filter) {
@@ -53,9 +50,17 @@ public class UserController {
     }
 
     /**
+     * Обновление пользователя
+     */
+    @Operation(summary = "Изменение роли пользователя")
+    @PutMapping("/{userId}")
+    public void changeUser(@PathVariable Long userId, @RequestBody @Valid UpdateUserRequest request) {
+        service.changeUser(userId, request);
+    }
+
+    /**
      * Изменение роли пользователя
      */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Изменение роли пользователя")
     @PutMapping("/change-role")
     public void changeRole(@RequestBody @Valid UpdateUserRoleRequest request) {
@@ -63,12 +68,20 @@ public class UserController {
     }
 
     /**
+     * Изменение почты пользователя
+     */
+    @Operation(summary = "Изменение почты пользователя")
+    @PutMapping("/change-email")
+    public void changeEmail(@RequestBody @Valid UpdateUserEmailRequest request) {
+        service.changeEmail(request);
+    }
+
+    /**
      * Изменение компании пользователя
      */
-    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Изменение компании пользователя")
-    @PutMapping("/change-company")
-    public void changeCompany(@RequestBody @Valid UpdateUserCompanyRequest request){
+    @PutMapping("/change-branch")
+    public void changeCompany(@RequestBody @Valid UpdateUserBranchRequest request){
         service.changeCompany(request);
     }
 

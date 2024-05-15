@@ -20,9 +20,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE " +
             "(:username IS null OR u.username LIKE %:username%) " +
             "AND (:email IS null OR u.email LIKE %:email%) " +
-            "AND (:roleID IS null OR u.role.id = :roleId) " +
-            "AND (:isDisposable IS null AND u.isDisposable = :isDisposable) " +
+            "AND (:roleId IS null OR u.role.id = :roleId) " +
             "AND (:status IS null OR u.status LIKE %:status%) " +
             "AND (:id IS null OR u.id = :id)")
-    List<User> findByFilter(Long id, Long roleId, String username, String email, String status, Boolean isDisposable);
+    List<User> findByFilter(Long id, Long roleId, String username, String email, String status);
 }

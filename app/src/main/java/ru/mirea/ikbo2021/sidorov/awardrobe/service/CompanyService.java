@@ -80,6 +80,7 @@ public class CompanyService {
                 filter.id(),
                 filter.status(),
                 filter.inn(),
+                filter.name(),
                 filter.physical_address(),
                 filter.legal_address(),
                 filter.manager_id()
@@ -111,6 +112,7 @@ public class CompanyService {
         toUpdate.setPhysical_address(company.getPhysical_address());
         toUpdate.setLegal_address(company.getLegal_address());
         toUpdate.setManager(manager);
+        toUpdate.setName(company.getName());
 
         return repository.save(toUpdate);
 

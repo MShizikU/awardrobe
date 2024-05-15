@@ -1,0 +1,38 @@
+.button{
+    cursor: pointer;
+    color: var(--white);
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    line-height: 24px;
+    border: none;
+    font-weight: 600;
+}
+
+.button.main{
+    text-align: center;
+    width: fit-content;
+    background: var(--lavand);
+}
+
+.button.main:hover{
+    background: linear-gradient(to right, var(--lavand) 0%, var(--purple) 100%);
+}
+
+.button.main:active{
+    background: var(--purple);
+}
+
+.button.secondary{
+    text-align: center;
+    width: fit-content;
+    background: var(--red);
+}
+
+.button.secondary:hover{
+    background: linear-gradient(to right, var(--red) 0%, var(--brown) 100%);
+}
+
+.button.secondary:active{
+    background: var(--brown);
+}

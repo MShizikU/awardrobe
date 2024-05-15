@@ -38,6 +38,13 @@ public class CellController {
         return mapper.toFullResponse(cell);
     }
 
+    @Operation(summary = "Получение ячейки текущего пользователя")
+    @GetMapping("/cell/user")
+    public List<CellCompactResponse> getCurrentCell(){
+        var cells = service.getUserCell();
+        return mapper.toListCompactResponse(cells);
+    }
+
     @Operation(summary = "Получение списка гардеробных ячеек")
     @GetMapping("/cells")
     public List<CellCompactResponse> getCells(){
@@ -46,7 +53,7 @@ public class CellController {
     }
 
     @Operation(summary = "Получение отфильтрованного списка ячеек")
-    @GetMapping("/cells/filter")
+    @PostMapping("/cells/filter")
     public List<CellCompactResponse> getCellsFiltered(@RequestBody @Valid CellFilter filter){
         List<Cell> cells = service.getByFilter(filter);
         return mapper.toListCompactResponse(cells);

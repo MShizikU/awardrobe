@@ -90,6 +90,17 @@ public class CellService {
         return cell.get();
     }
 
+    public List<Cell> getUserCell(){
+        User user = userService.getCurrentUser();
+        var cells = repository.findWithFilter(null, Status.INUSE.getStatus(),null, user.getId(), null);
+        return cells;
+    }
+
+    public Cell getUserCurCell(Long userId){
+        var cell = repository.findWithFilter(null, Status.INUSE.getStatus(),null, userId, null);
+        return cell.isEmpty() ? null : cell.getFirst();
+    }
+
     /**
      * Получение списка ячеек по ID нардеробного ряда
      *
@@ -132,7 +143,7 @@ public class CellService {
     public Cell update(Long cellId, Cell request){
         Cell cell = getByIdStrict(cellId);
 
-        var agr = agrService.getByIdStrict(request.getId());
+        var agr = agrService.getByIdStrict(request.getAgr().getId());
 
         cell.setStatus(request.getStatus());
         cell.setAgr(agr);
@@ -158,6 +169,26 @@ public class CellService {
         freeCell.setUser(user);
         freeCell.setStatus(Status.INUSE.getStatus());
         return save(freeCell);
+    }
+
+    /**
+     * Установка использования ячейкой пользователя
+     * @param user_id - ID пользователя
+     * @param agr_id - ID гардеробного ряда
+     * @return обновленная ячейка
+     */
+    @Transactional
+    public Cell setUserInCell(Long user_id, Long agr_id, Long cellId){
+        var user = userService.getByIdStrict(user_id);
+        var agr = agrService.getByIdStrict(agr_id);
+        var cell = getByIdStrict(cellId);
+        if (cell.getStatus() != Status.INUSE.getStatus()){
+            visitService.createVisit(user_id, cell);
+            cell.setUser(user);
+            cell.setStatus(Status.INUSE.getStatus());
+            return save(cell);
+        }
+        return null;
     }
 
     /**

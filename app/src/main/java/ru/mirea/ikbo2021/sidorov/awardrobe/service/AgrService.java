@@ -5,11 +5,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.dto.agr.AgrFilter;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.Agr;
+import ru.mirea.ikbo2021.sidorov.awardrobe.domain.model.User;
 import ru.mirea.ikbo2021.sidorov.awardrobe.domain.utils.Status;
 import ru.mirea.ikbo2021.sidorov.awardrobe.exception.general.EntityNotFound;
 import ru.mirea.ikbo2021.sidorov.awardrobe.repository.AgrRepository;
+import ru.mirea.ikbo2021.sidorov.awardrobe.repository.CellRepository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +22,7 @@ public class AgrService {
     private final AgrRepository repository;
     private final UserService userService;
     private final BranchService branchService;
+    private final CellRepository cellRepository;
 
     /**
      * Сохранение гардеробного ряда
@@ -32,9 +38,12 @@ public class AgrService {
      * @return гардеробный ряд
      */
     public Agr create(Agr agr){
-        var executor = userService.getByIdStrict(agr.getExecutor().getId());
 
         var branch = branchService.getById(agr.getBranch().getId());
+        User executor = null;
+        if (agr.getStatus().equals(Status.ACTIVE.getStatus()) || agr.getExecutor() != null){
+            executor = userService.getByIdStrict(agr.getExecutor().getId());
+        }
 
         return save(
                 Agr.builder()
@@ -84,6 +93,36 @@ public class AgrService {
     }
 
     /**
+     * Получение оптимального ряда
+     * @param branchId ID филилала
+     * @return ряд
+     */
+    public Agr getOptimal(Long branchId){
+        var branch = branchService.getById(branchId);
+        List<Agr> agrs = getAgrsByBranchId(branchId);
+        agrs = agrs.stream().filter(agr -> Objects.equals(agr.getStatus(), Status.ACTIVE.getStatus())).toList();
+        Optional<Agr> max = agrs.stream().max(Comparator.comparing(v -> cellRepository.findWithFilter(null, "active",null, null, v.getId()).size()));
+
+        return max.orElse(null);
+    }
+
+    public void setAgrExecutor(Long agrId, Long executorId){
+        var agr = getByIdStrict(agrId);
+        var executor = userService.getByIdStrict(executorId);
+        agr.setExecutor(executor);
+        agr.setStatus(Status.ACTIVE.getStatus());
+        repository.save(agr);
+    }
+
+    public void removeAgrExecutor(long agrId){
+        var agr = getByIdStrict(agrId);
+        agr.setExecutor(null);
+        agr.setStatus(Status.INACTIVE.getStatus());
+        repository.save(agr);
+    }
+
+
+    /**
      * Получение списка гардеробных рядов
      *
      * @return список гардеробных рядов
@@ -101,8 +140,9 @@ public class AgrService {
     public Agr update(Long agrId, Agr request){
         Agr agr = getByIdStrict(agrId);
 
-        if (request.getExecutor() != null){
-            var executor = userService.getByIdStrict(request.getExecutor().getId());
+        User executor = null;
+        if (request.getStatus().equals(Status.ACTIVE.getStatus()) || request.getExecutor() != null){
+            executor = userService.getByIdStrict(agr.getExecutor().getId());
             agr.setExecutor(executor);
         }
 

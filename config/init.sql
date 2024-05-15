@@ -57,25 +57,3 @@ CREATE TABLE visit(
     cell_id INTEGER REFERENCES cell(id) NOT NULL,
     user_id INTEGER REFERENCES users(id) NOT NULL
 );
-
-/*
-CREATE TABLE action_names(
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL UNIQUE,
-    related_database_name TEXT NOT NULL
-);
-
-CREATE TABLE action_types(
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL UNIQUE
-);
-
-CREATE TABLE log(
-    id SERIAL PRIMARY KEY,
-    status TEXT NOT NULL, -- started, completed, failed
-    performed_time TIMESTAMP NOT NULL, -- timestamp of performed action
-    related_entity_id BIGINT NOT NULL, -- id of related entity (e.g. user_id, company_id)
-    action_name_id INTEGER REFERENCES action_names(id) NOT NULL,
-    action_type_id INTEGER REFERENCES action_types(id) NOT NULL,
-    performer_id INTEGER REFERENCES users(id) NOT NULL
-);*/

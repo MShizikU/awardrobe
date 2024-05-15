@@ -71,9 +71,8 @@ public class User implements UserDetails {
     /**
      * Привязка к филиалу
      */
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "company_id")
-    private Company company;
+    @Column(name = "branch_id", nullable = true)
+    private Long branch_id;
 
     /**
      * Проверка, является ли пользователь администратором

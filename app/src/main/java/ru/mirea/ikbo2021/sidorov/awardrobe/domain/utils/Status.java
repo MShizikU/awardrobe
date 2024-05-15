@@ -7,7 +7,8 @@ public enum Status {
     INACTIVE("inactive"),
     INUSE("inuse"),
     BLOCKED("blocked"),
-    DELETED("deleted");
+    DELETED("deleted"),
+    ERROR("error");
 
     private final String status;
 

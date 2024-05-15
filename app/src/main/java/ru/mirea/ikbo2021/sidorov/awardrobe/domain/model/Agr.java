@@ -41,14 +41,14 @@ public class Agr {
     /**
      * Текущий исполнитель
      */
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "executor_id")
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "executor_id", nullable = true)
     private User executor;
 
     /**
      * Головной филиал
      */
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "branch_id")
     private Branch branch;
 }

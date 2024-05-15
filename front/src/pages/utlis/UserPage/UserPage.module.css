@@ -1,0 +1,57 @@
+.horizontal_block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+}
+
+.user_info{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.visits{
+    width: 50%;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.visits_label{
+    font-size: 24px;
+    color: var(--brown);
+}
+
+.info_row{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info_title{
+    font-size: 20px;
+    color: var(--brown);
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.info_value{
+    font-size: 18px;
+    color: var(--brown);
+    font-weight: 500;
+    line-height: 21px;
+}
+.btn_row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+}

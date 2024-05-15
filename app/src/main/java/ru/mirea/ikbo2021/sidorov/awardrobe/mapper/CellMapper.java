@@ -22,7 +22,6 @@ public interface CellMapper {
     @Mappings({
             @Mapping(target = "user_id", source = "user.id"),
             @Mapping(target = "agr_id", source = "agr.id"),
-
     })
     CellCompactResponse toCompactResponse(Cell cell);
 
