@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // export const API_URL = process.env.REACT_APP_BASE_API_URL + '/api/v1'
-export const API_URL = 'http://localhost:8080'
+export const API_URL = 'http://158.160.155.45:8081'
 
 const $api = axios.create({
     withCredentials: true,
